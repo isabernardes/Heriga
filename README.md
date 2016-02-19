@@ -4,9 +4,11 @@ This project is an open source web app to record and preserve intangible culture
 
 WHAT IS IT?
 
-a cultural network, working as a social network but for heritage content
+a cultural network, working as a social network but for heritage content;
+
 a platform to manage digital cultural heritage;
-a tool to archive and record data 
+
+a tool to archive and record data ;
 
 MAIN FEATURES
 
