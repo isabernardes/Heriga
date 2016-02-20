@@ -4,33 +4,22 @@ This project is an open source web app to record and preserve intangible culture
 
 WHAT IS IT?
 
-a cultural network, working as a social network but for heritage content;
-
-a platform to manage digital cultural heritage;
-
-a tool to archive and record data ;
+- a cultural network, working as a social network but for heritage content;
+- a platform to manage digital cultural heritage;
+- a tool to archive and record data ;
 
 MAIN FEATURES
 
-
-User authentication: Signing in, Login/Login out
-User Profile: commenting entries
-
-Storing and displaying data: written input, video recording, photos, audio
-
-Browse and search feature
-
-Feed news
-
-Map feature
-
-Incorporated APIs, Facebook, Youtube, Soundcloud, etc…
-
-Labels
-
-
+- User authentication: Signing in, Login/Login out
+- User Profile: commenting entries
+- Storing and displaying data: written input, video recording, photos, audio
+- Browse and search feature
+- Feed news
+- Map feature
+- Incorporated APIs, Facebook, Youtube, Soundcloud, etc…
+- Labels
 
 
 Desired features
 
-messaging with other users
+- messaging with other users
