@@ -1,21 +1,21 @@
 from django.conf.urls import patterns, url
 
 from .views import (
-	posts_list,
-	posts_create,
-	posts_detail,
-	posts_update,
-	posts_delete,
+	post_list,
+	post_create,
+	post_detail,
+	post_update,
+	post_delete,
 	)
 
 
 
 
 urlpatterns = [
-	url(r'^$', posts_list),
-	url(r'^create/$', posts_create),
-	url(r'^detail/$', posts_detail),
-	url(r'^update/$', posts_update),
-	url(r'^delete/$', posts_delete),
+	url(r'^$', post_list, name='list'),
+	url(r'^create/$', post_create),
+	url(r'^(?P<id>\d+)/$', post_detail, name='detail'),
+	url(r'^(?P<id>\d+)/edit$', post_update, name='update'),
+	url(r'^(?P<id>\d+)/delete$', post_delete),
 
 ]

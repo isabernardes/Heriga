@@ -1,22 +1,33 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, redirect
 
+from .forms import PostForm
 from .models import Post
 
 # Create your views here.
 
-def posts_create(request):
-
-	return HttpResponse("<h1>Create</h1>")
-
-def posts_detail(request):
+def post_create(request):
+	form =PostForm(request.POST or None)
+	if form.is_valid():
+		instance = form.save(commit=False)
+		instance.save()
+		return HttpResponseRedirect(instance.get_absolute_url())
+	
 	context = {
-		"title": "Detail"
+		"form": form,
+	}
+	return render(request, "post_form.html", context)
+
+def post_detail(request, id = None):
+	instance =get_object_or_404(Post, id =id)
+	context = {
+		"title": instance.title,
+		"instance":instance,
 	}
 
-	return render(request, "index", context)
+	return render(request, "post_detail.html", context)
 
-def posts_list(request):
+def post_list(request):
 	queryset = Post.objects.all()
 	context = {
 		"object_list": queryset,
@@ -24,10 +35,23 @@ def posts_list(request):
 	}
 	return render(request, "index.html", context)
 
-def posts_update(request):
+def post_update(request, id=None):
+	instance =get_object_or_404(Post, id =id)
+	form =PostForm(request.POST or None, instance=instances)
+	if form.is_valid():
+		instance = form.save(commit=False)
+		instance.save()
+		return HttpResponseRedirect(instance.get_absolute_url())
+	context = {
+		"title": instance.title,
+		"instance":instance,
+		"form":form,
+	}
 
-	return HttpResponse("<h1>Update</h1>")
+	return render(request, "post_form.html", context)
+	
 
-def posts_delete(request):
-
-	return HttpResponse("<h1>Delete</h1>")
+def post_delete(request, id=None):
+	instance =get_object_or_404(Post, id =id)
+	instance.deleted()
+	return redirect("posts:list")
