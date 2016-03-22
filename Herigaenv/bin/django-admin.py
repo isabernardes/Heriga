@@ -1,4 +1,4 @@
-#!/media/data/Bremen/learnit/git/Heriga/Herigaenv/bin/python
+#!/Users/isabelbernardes/documents/Heriga/Herigaenv/bin/python
 from django.core import management
 
 if __name__ == "__main__":
