@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -11,8 +12,10 @@ def post_create(request):
 	if form.is_valid():
 		instance = form.save(commit=False)
 		instance.save()
+		messages.success(request, "Successfully Created")
 		return HttpResponseRedirect(instance.get_absolute_url())
-	
+	else:
+		messages.error(request, "Not Successfully Created")
 	context = {
 		"form": form,
 	}
@@ -33,14 +36,15 @@ def post_list(request):
 		"object_list": queryset,
 		"title": "List"
 	}
-	return render(request, "index.html", context)
+	return render(request, "post_list.html", context)
 
 def post_update(request, id=None):
-	instance =get_object_or_404(Post, id =id)
-	form =PostForm(request.POST or None, instance=instances)
+	instance = get_object_or_404(Post, id =id)
+	form = PostForm(request.POST or None, instance=instance)
 	if form.is_valid():
 		instance = form.save(commit=False)
 		instance.save()
+		messages.success(request, "<a href='#'>Item</a> Saved", extra_tags='html_safe')
 		return HttpResponseRedirect(instance.get_absolute_url())
 	context = {
 		"title": instance.title,
@@ -52,6 +56,7 @@ def post_update(request, id=None):
 	
 
 def post_delete(request, id=None):
-	instance =get_object_or_404(Post, id =id)
-	instance.deleted()
+	instance = get_object_or_404(Post, id =id)
+	messages.success(request, "Successfully Deleted")
+	instance.delete()
 	return redirect("posts:list")
