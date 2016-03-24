@@ -10,6 +10,9 @@
 	   		 <div class="six columns offset-by-three">
 	   		 	<div class = "story">
 					<a href = '{{ obj.get_absolute_url}}'>{{ obj.title }}</a><br/>
+					{% if obj.image %}
+					<img class = "u-max-full-width" src = '{{ obj.image.url }}'>
+					{% endif %}
 					{{ obj.content |linebreaks|truncatechars:120}}<br/>
 					{{ obj.timestamp }}<br/>
 					<a class="button" href='{{ obj.get_absolute_url}}'>View</a>
