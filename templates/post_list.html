@@ -1,16 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{title}} is working</h1>
+
+<h1>{{title}}</h1>
 
 {% for obj in  object_list %}
 
-{% url "posts:detail" id=obj.id %}
-<a href = '{{ obj.get_absolute_url}}'>
-
-{{ obj.content }}<br/>
-{{ obj.timestamp }}<br/>
-{{ obj.updated }}<br/>
-{{ obj.id }}<br/>
+	<div class="container">
+		<div class="sixteen columns">
+	   		 <div class="six columns offset-by-three">
+	   		 	<div class = "story">
+					<a href = '{{ obj.get_absolute_url}}'>{{ obj.title }}</a><br/>
+					{{ obj.content |linebreaks|truncatechars:120}}<br/>
+					{{ obj.timestamp }}<br/>
+					<a class="button" href='{{ obj.get_absolute_url}}'>View</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
 {% endfor %}
 
