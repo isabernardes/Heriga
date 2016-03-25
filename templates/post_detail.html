@@ -1,11 +1,10 @@
-<!--DOCTYPE html -->
-
-
 {% extends "base.html" %}
+{% load urlify %}
 
 
 {% block head_title %}
-{{ instance.title }} | {{ block.super }} {%  endblock head_title %}
+{{ instance.title }} | {{ block.super }} 
+{%  endblock head_title %}
 
 
 {% block content %}
@@ -18,7 +17,18 @@
 	   		 <img class = "u-max-full-width" src = '{{ instance.image.url }}'>
 {% endif %}
 				<h1>{{title}}</h1><p>{{ instance.timestamp }}</p>
+
+					<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.built_absolute_uri }}">
+Facebook</a>
+					<a href="https://twitter.com/home?status={{ instance.content|truncatechars:80|urlify }}%20{{ request.built_absolute_uri }}">
+Twitter</a>
+					<a href='https://plus.google.com/share?url={{ request.built_absolute_uri }}'>GooglePlus</a>
+
+
+
+
 					{{ instance.content |linebreaks }}<br/>
+
 			</div>
 		</div>
 	</div>
