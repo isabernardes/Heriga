@@ -43,3 +43,7 @@
 h1 {
 	align: center;
 }
+
+.comment-reply{
+    display:none;
+}
