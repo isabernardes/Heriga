@@ -13,6 +13,9 @@ from django.contrib.contenttypes.models import ContentType
 
 # Create your views here.
 
+def home(request):
+	return render (request, "home.html")
+
 def post_create(request):
 	if not request.user.is_staff or not request.user.is_superuser:
 		raise Http404
