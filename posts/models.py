@@ -16,8 +16,10 @@ class PostManager(models.Manager):
         return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 
 
-def upload_location(instance, filename):    
-    return "%s/%s" %(new_id, filename)
+def upload_location(instance, filename):
+    #filebase, extension = filename.split(".")
+    #return "%s/%s.%s" %(instance.id, instance.id, extension)
+    return "%s/%s" %(instance.id, filename)
 
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
