@@ -16,6 +16,9 @@ from django.contrib.contenttypes.models import ContentType
 def home(request):
 	return render (request, "home.html")
 
+def aboutus(request):
+	return render (request, "aboutus.html")
+
 def post_create(request):
 	if not request.user.is_staff or not request.user.is_superuser:
 		raise Http404
