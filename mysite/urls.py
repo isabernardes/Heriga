@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'^$', 'posts.views.home', name='homepage'),
     url(r'^about-us/$','posts.views.aboutus', name='aboutus'),
     url(r'^posts/', include('posts.urls', namespace='posts')),
-    url(r'^communities/', include('communities.urls', namespace='communities_list')),
+    url(r'^communities/$', 'communities.views.communities_list', name='communities_list'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

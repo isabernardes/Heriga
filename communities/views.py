@@ -13,7 +13,7 @@ def communities_create(request):
 
 	return render(request, "communities_form.html", {})
 
-def communities_detail(request, id=None):
+def communities_detail(request):
 
 	return render(request, "communities_detail.html",{})
 
@@ -22,12 +22,12 @@ def communities_list(request):
 	return render(request, "communities_list.html", {})
 
 
-def communities_update(request, id=None):
+def communities_update(request):
 	
 	return render(request, "communities_form.html", {})
 
 
 
-def communities_delete(request, id=None):
+def communities_delete(request):
 	
 	return redirect("communities:list")

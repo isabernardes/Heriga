@@ -130,11 +130,11 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "extra_static"),
     #'/var/www/static/',
 ]
 
 
-STATIC_ROOT = "/Users/isabelbernardes/Sites/heriga/static/"
-MEDIA_ROOT = "/Users/isabelbernardes/Sites/heriga/media/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
