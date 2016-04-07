@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'posts',
     'comments',
     'communities',
+    'signups'
 ]
 
 MIDDLEWARE_CLASSES = [

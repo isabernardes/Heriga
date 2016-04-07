@@ -17,9 +17,9 @@ def communities_detail(request):
 
 	return render(request, "communities_detail.html",{})
 
-def communities_list(request):
+def communities(request):
 
-	return render(request, "communities_list.html", {})
+	return render(request, "communities.html", {})
 
 
 def communities_update(request):
