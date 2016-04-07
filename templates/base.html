@@ -47,9 +47,11 @@
 		        <ul class = "navbar-list">
 		        
 		          <li class = "navbar-item">
-		              <a class = "navbar-link" href='{% url "aboutus" %}'> ABOUT</a>
+		               <a class = "navbar-link" href='{% url "homepage" %}'> HOME</a>
+              <a class = "navbar-link" href='{% url "posts:list" %}'> STORIES</a>
+                <a class = "navbar-link" href='{% url "aboutus" %}'> ABOUT</a>
                 <a class = "navbar-link" href='{% url "communities" %}'> COMMUNITIES</a>
-		            <a class = "navbar-link" href='{% url "signup" %}'> SIGNUP</a>
+                <a class = "navbar-link" href='{% url "signup" %}'> SIGNUP</a>
 		          </li>
 		        </ul>
 		      </div>
