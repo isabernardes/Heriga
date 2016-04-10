@@ -4,12 +4,13 @@ from django.db import models
 # MVC MODEL VIEW CONTROLLER
 
 class Communities(models.Model):
-	title = models.CharField(max_length=120)
-	content = models.TextField()
+	name = models.CharField(max_length=120)
+	description = models.TextField()
+	#timestamp
 	
 
 	def __unicode__(self):
-		return self.title
+		return self.name
 
 	def __str__(self):
-		return self.title
+		return self.name

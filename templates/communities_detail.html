@@ -1,1 +1,15 @@
-<h1>Communities_detail</h1>
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+	<h1>{{ name }}}</h1>
+
+{{ instance.id }}<br/>
+{{ instance.name }}<br/>
+{{ instance.description}}<br/>
+	
+{% endblock content %}
+
+
+<!-- THIS SHOULD BE REDIRECT TO A LIST OF THE STORIES BELONGING TO THE COMMUNITY-->

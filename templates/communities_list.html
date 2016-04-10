@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block content %}
+	
+
+
+<h1> {{ name }} of communities</h1>
+
+{% for obj in object_list %}
+	{{ obj.name }}</br>
+	{{ obj.description }} </br>
+{% endfor %}
+	
+
+
+
+{% endblock content %}

@@ -1,66 +1,9 @@
+{% extends "base.html" %}
 {% load staticfiles %}
-<!--DOCTYPE html -->
-<html>
-
-<head>
-<title>{% block head_title %} Heriga {%  endblock head_title %}</title>
-
-<!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Skeleton: Responsive CSS Boilerplate</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
-
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="{% static './css/css/normalize.css' %}">
-  <link rel="stylesheet" href="{% static './css/css/skeleton.css' %}">
-  <link rel="stylesheet" href="{% static './css/base.css' %}">
-
-  <!-- Scripts
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="../../dist/images/favicon.png">
 
 
-<style>
+{% block content %}
 
-</style>
-</head>
-<body>
-
-		<!--Navbar-->
-			<nav class = "navbar">
-		      <div class = "container">
-		        <ul class = "navbar-list">
-		        
-		          <li class = "navbar-item">
-		              <a class = "navbar-link" href='{% url "homepage" %}'> HOME</a>
-              <a class = "navbar-link" href='{% url "posts:list" %}'> STORIES</a>
-                <a class = "navbar-link" href='{% url "aboutus" %}'> ABOUT</a>
-                <a class = "navbar-link" href='{% url "communities" %}'> COMMUNITIES</a>
-                <a class = "navbar-link" href='{% url "signup" %}'> SIGNUP</a>
-		          </li>
-		        </ul>
-		      </div>
-		    </nav>
-	
-      <div class='container'>
-      <br>
-      <h1>About us</h1></div>
-
-
-</body>
-</html>
+  <h1>About us</h1>
+  
+{% endblock content %}

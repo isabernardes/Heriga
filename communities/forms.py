@@ -5,6 +5,6 @@ class CommunitiesForm(forms.ModelForm):
 	class Meta:
 		model = Communities
 		fields = [
-			"title",
-			"content",
+			"name",
+			"description",
 		]

@@ -1,11 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse
-
-# Create your views here.
-
 from django.http import HttpResponse
-
-
 from .forms import CommunitiesForm
 from .models import Communities
 
@@ -14,12 +9,24 @@ def communities_create(request):
 	return render(request, "communities_form.html", {})
 
 def communities_detail(request):
+	instance = get_object_or_404(Communities, id=1)
+	#Posts list of this community
 
-	return render(request, "communities_detail.html",{})
+	context = {
+		"name": instance.name,
+		"instance": instance
+	}
 
-def communities(request):
+	return render(request, "communities_detail.html",context)
 
-	return render(request, "communities.html", {})
+def communities_list(request):
+	queryset = Communities.objects.all()
+	
+	context = {
+		"name": "List",
+		"object_list": queryset
+	}
+	return render(request, "communities_list.html", context)
 
 
 def communities_update(request):

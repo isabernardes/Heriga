@@ -5,7 +5,7 @@ from django.contrib import admin
 from .models import Communities
 
 class CommunitiesModelAdmin(admin.ModelAdmin):	
-	list_display = ["title", "content"]
+	list_display = ["name", "description"]
 	class Meta:
 		model = Communities
 

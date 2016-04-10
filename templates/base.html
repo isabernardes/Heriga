@@ -44,14 +44,16 @@
 		<!--Navbar-->
 			<nav class = "navbar">
 		      <div class = "container">
+            <a class = "navbar-brand" href="#">
+              <img style="max-width:100px; margin-top: 5px;" src="http://van-heusden.eu/assets/logo/heriga_logo.jpg">
+            </a>
 		        <ul class = "navbar-list">
-		        
 		          <li class = "navbar-item">
 		               <a class = "navbar-link" href='{% url "homepage" %}'> HOME</a>
-              <a class = "navbar-link" href='{% url "posts:list" %}'> STORIES</a>
-                <a class = "navbar-link" href='{% url "aboutus" %}'> ABOUT</a>
-                <a class = "navbar-link" href='{% url "communities" %}'> COMMUNITIES</a>
-                <a class = "navbar-link" href='{% url "signup" %}'> SIGNUP</a>
+                  <a class = "navbar-link" href='{% url "posts:list" %}'> STORIES</a>
+                  <a class = "navbar-link" href='{% url "aboutus" %}'> ABOUT</a>
+                  <a class = "navbar-link" href='{% url "communities:communities_list" %}'> COMMUNITIES</a>
+                  <a class = "navbar-link" href='{% url "signup" %}'> SIGNUP</a>
 		          </li>
 		        </ul>
 		      </div>
