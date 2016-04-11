@@ -20,10 +20,10 @@ ALLOWED_HOSTS = ['*']
 SHARE_URL = "https://powerful-river-75213.herokuapp.com/"
 # Static asset configuration
 import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-     os.path.join(BASE_DIR, 'static'),
+     os.path.dirname(os.path.join(BASE_DIR, 'static')),
  )
