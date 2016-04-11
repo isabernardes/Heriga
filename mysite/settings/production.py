@@ -17,13 +17,13 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 
-SHARE_URL = "https://powerful-river-75213.herokuapp.com/"
+SHARE_URL = "https://sleepy-plateau-65105.herokuapp.com"
 # Static asset configuration
-import os
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STATIC_ROOT = 'staticfiles'
-STATIC_URL = '/static/'
+#import os
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#STATIC_ROOT = 'staticfiles'
+#STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-     os.path.dirname(os.path.join(BASE_DIR, 'static')),
- )
+#STATICFILES_DIRS = (
+#     os.path.dirname(os.path.join(BASE_DIR, 'static')),
+# )
