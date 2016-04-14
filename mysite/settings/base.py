@@ -80,12 +80,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        #'NAME': 'herigadb',
-	#'USER': 'herigauser',
-	#'PASSWORD': 'learnit',
-	#'HOST': 'localhost',
-	#'PORT': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'NAME': 'd5pdf048vusu2u',
+	#'USER': 'osuoqulpurvlri',
+	#'PASSWORD': 'RJ5kC6z485ArI8pbVXym08n1XM',
+	#'HOST': 'ec2-54-221-249-201.compute-1.amazonaws.com',
+	#'PORT': '5432',
      }
 }
 
@@ -131,11 +131,11 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "extra_static"),
+    os.path.join(BASE_DIR, "extra_static").replace('\\', '/'),
     #'/var/www/static/',
 ]
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
-MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+STATIC_ROOT = os.path.join(BASE_DIR, "static").replace('\\', '/')
+MEDIA_ROOT = os.path.join(BASE_DIR, "media").replace('\\', '/')
 
