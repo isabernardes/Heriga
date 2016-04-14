@@ -9,11 +9,11 @@ def communities_create(request):
 
 	return render(request, "communities_form.html", {})
 
-def communities_detail(request):
-	#instance = get_object_or_404(Communities, id=1)
+def communities_detail(request, id=None):
+	instance = get_object_or_404(Communities, id=id)
 	
 	#today = timezone.now().date()
-	queryset_list = Post.objects.filter(community_id=1)
+	queryset = Post.objects.filter(community_id=id)
 
 
 	#query = request.GET.get("q")
@@ -37,12 +37,12 @@ def communities_detail(request):
 	#	queryset = paginator.page(paginator.num_pages)
 
 	context = {
-		"object_list": queryset_list,
-		"title": "List",
+		"object_list": queryset,
+		"instance": instance,
 	#	"today": today,
 	#	"page_request_var": page_request_var
 	}
-	return render(request, "post_list.html", context)
+	return render(request, "communities_detail.html", context)
 
 
 

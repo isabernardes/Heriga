@@ -1,19 +1,39 @@
 {% extends "base.html" %}
-{% load staticfiles %}
-
-
 {% block content %}
-	
+
+<div class="container">
+		<div class="sixteen columns">
+	   		 <div class="six columns offset-by-three">
+	   		 	
+<h1>Communities</h1>
+
+<form method='GET' action=''>
+<input type='text' name='q' placeholder='Search communities' value='{{ request.GET.q }}'/>
+<input type='submit' value='Search' />
+</form>
+
+</div>
+</div>
+</div>
+
+{% for obj in  object_list %}
+
+	<div class="container">
+		<div class="sixteen columns">
+	   		 <div class="six columns offset-by-three">
+	   		 	<div class = "story">
 
 
-<h1> {{ name }} of communities</h1>
+				<h2>{{ obj.name }}</h2></br>
+				<p>{{ obj.description }}</p> </br>
 
-{% for obj in object_list %}
-	{{ obj.name }}</br>
-	{{ obj.description }} </br>
+				<a class="button" href=''>View</a>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
 {% endfor %}
-	
-
-
 
 {% endblock content %}
