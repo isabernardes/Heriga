@@ -3,6 +3,49 @@
 
 {% block content %}
 
-        <h1>This is the Homepage of Heriga</h1>
-        
+<div class="container">
+		<div class="sixteen columns">	 
+				<h1>Welcome to Heriga</h1>
+				<a class="button" href='{% url "posts:create" %}'>Tell a story</a>
+				<a class="button" href='{% url "communities:communities_create" %}'>Create Community</a>
+		</div>
+</div>
+
+{% for obj in  object_list %}
+
+	<div class="container">
+		<div class="sixteen columns">
+	   		 <div class="six columns offset-by-three">
+	   		 	<div class = "story">
+					<a href = '{{ obj.get_absolute_url}}'>{{ obj.title }}</a><br/>
+					{% if obj.image %}
+					<img class = "u-max-full-width" src = '{{ obj.image.url }}'>
+					{% endif %}
+					{% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+					{% if obj.user.get_full_name %}<p>Author:{{ obj.user.get_full_name }}</p>{% endif %}
+					{{ obj.content |linebreaks|truncatechars:120}}<br/>
+					{{ obj.publish }}<br/>
+					<a class="button" href='{{ obj.get_absolute_url}}'>View</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endfor %}
+
+{% for obj in  object_list %}
+<div class="container">
+<div class="sixteen columns">
+	   		 <div class="six columns offset-by-three">
+	   		 	<div class = "story">
+				<h2>{{ obj.name }}</h2></br>
+				<p>{{ obj.description }}</p> </br>
+
+				<a class="button" href=''>View</a>
+
+   	</div>
+			</div>
+		</div>
+</div>
+        {% endfor %}
 {% endblock content %}

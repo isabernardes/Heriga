@@ -14,7 +14,14 @@ from django.contrib.contenttypes.models import ContentType
 # Create your views here.
 
 def home(request):
-	return render (request, "home.html")
+	queryset_one = Post.objects.filter(id=2)
+
+	context = {
+		"object_list": queryset_one,
+	}
+
+
+	return render (request, "home.html", context)
 
 def aboutus(request):
 	return render (request, "aboutus.html")
