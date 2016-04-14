@@ -11,6 +11,7 @@
 <input type='text' name='q' placeholder='Search communities' value='{{ request.GET.q }}'/>
 <input type='submit' value='Search' />
 </form>
+<a class="button" href='{% url "communities:communities_create" %}'>Create Community</a>
 
 </div>
 </div>

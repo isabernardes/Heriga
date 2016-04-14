@@ -11,6 +11,7 @@
 <input type='text' name='q' placeholder='Search posts' value='{{ request.GET.q }}'/>
 <input type='submit' value='Search' />
 </form>
+<a class="button" href='{% url "posts:create" %}'>Tell a story</a>
 
 </div>
 </div>
