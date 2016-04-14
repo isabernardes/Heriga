@@ -17,9 +17,11 @@
 	   		 <img class = "u-max-full-width" src = '{{ instance.image.url }}'>
 {% endif %}
 				<h1>{{title}}</h1><p>{% if instance.draft %} <span style= 'color:red'>Draft</span>{% endif %} {{ instance.publish }}</p>
-				{% if instance.user.get_full_name %}
-				<p>Author: {{ instance.user.get_full_name }}</p>
-				{% endif %}
+				
+				<p>Author: {{ instance.user }}</p>
+
+				
+                <p>Community: {{ instance.community }}</p>
 
                 <p><div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 <hr/>

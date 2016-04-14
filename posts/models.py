@@ -10,6 +10,7 @@ from comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
 
 
+
 class PostManager(models.Manager):
     def active(self, *args, **kwargs):
         # Post.objects.all() = super(PostManager, self).all()
@@ -37,6 +38,7 @@ class Post(models.Model):
     publish = models.DateField(auto_now=False, auto_now_add=False)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+    community = models.ForeignKey('communities.Communities', default = 1)
     #language = models.CharField(max_length=120)
     #source = models.CharField(max_length=120)
     #summary = models.CharField(max_length=120)
