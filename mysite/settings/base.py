@@ -130,6 +130,11 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "extra_static").replace('\\', '/'),
     #'/var/www/static/',
