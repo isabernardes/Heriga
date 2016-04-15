@@ -3,7 +3,10 @@
 		
 	<ul class = "messages">
 	{% for message in messages %}
-	<li{% if message.tag %} class = "{{ message.tag }}"{% endif %}>{{message}} </li>
+	<li>
+	<p>
+	{% if message.tag %} class = "{{ message.tag }}"{% endif %}{{message}} 
+	</p> </li>
 	{% endfor %}
 	</ul>
 

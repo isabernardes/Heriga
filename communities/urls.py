@@ -13,8 +13,8 @@ from .views import (
 urlpatterns = [
 	url(r'^$', communities_list, name='communities_list'),
 	url(r'^create/$', communities_create, name='communities_create' ),
-	url(r'^detail/(?P<id>\d+)/$', communities_detail, name='detail'),
-	url(r'^update/$', communities_update, name='update'),
-	url(r'^delete/$', communities_delete),
+	url(r'^(?P<id>\d+)/$', communities_detail, name='detail'),
+	url(r'^(?P<id>\d+)/edit/$', communities_update, name='update'),
+	url(r'^(?P<id>\d+)/delete/$', communities_delete),
 
 ]

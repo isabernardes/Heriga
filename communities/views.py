@@ -1,13 +1,27 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect, Http404
 from .forms import CommunitiesForm
 from .models import Communities
 from posts.models import Post
+from django.contrib import messages
 
 def communities_create(request):
+	if not request.user.is_staff or not request.user.is_superuser:
+		raise Http404
+	form =CommunitiesForm(request.POST or None, request.FILES or None)
+	if form.is_valid():
+		instance = form.save(commit=False)
+		instance.save()
+		messages.success(request, "Successfully Created")
+		return HttpResponseRedirect(instance.get_absolute_url())
+	else:
+		messages.error(request, "Not Created")
+	context = {
+		"form": form,
+	}
+	return render(request, "communities_form.html", context)
 
-	return render(request, "communities_form.html", {})
 
 def communities_detail(request, id=None):
 	instance = get_object_or_404(Communities, id=id)
@@ -68,12 +82,31 @@ def communities_list(request):
 	return render(request, "communities_list.html", context)
 
 
-def communities_update(request):
-	
-	return render(request, "communities_form.html", {})
+def communities_update(request, id =None):
+	if not request.user.is_staff or not request.user.is_superuser:
+		raise Http404
+	instance = get_object_or_404(Post, id =id)
+	form = CommunitiesForm(request.POST or None, request.FILES or None, instance=instance)
+	if form.is_valid():
+		instance = form.save(commit=False)
+		instance.save()
+		messages.success(request, "<a href='#'>Item</a> Saved", extra_tags='html_safe')
+		return HttpResponseRedirect(instance.get_absolute_url())
+	context = {
+		"title": instance.title,
+		"instance":instance,
+		"form":form,
+	}
+
+	return render(request, "communities_form.html", context)
 
 
-
-def communities_delete(request):
+def communities_delete(request, id=None):
+	if not request.user.is_staff or not request.user.is_superuser:
+		raise Http404
+	instance = get_object_or_404(Post, id =id)
+	messages.success(request, "Successfully Deleted")
+	instance.delete()
+	return redirect("communities:list")
 	
 	return redirect("communities:list")
