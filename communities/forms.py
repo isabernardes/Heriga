@@ -7,4 +7,5 @@ class CommunitiesForm(forms.ModelForm):
 		fields = [
 			"name",
 			"description",
+			"image",
 		]

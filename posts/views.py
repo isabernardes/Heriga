@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.db.models import Q
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+#from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from comments.forms import CommentForm
 from comments.models import Comment
 from .forms import PostForm
@@ -106,23 +106,23 @@ def post_list(request):
 				Q(user__first_name__icontains=query) |
 				Q(user__last_name__icontains=query)
 				).distinct()
-	paginator = Paginator(queryset_list, 10) 
-	page_request_var = "page"
-	page = request.GET.get(page_request_var)
-	try:
-		queryset = paginator.page(page)
-	except PageNotAnInteger:
+	#paginator = Paginator(queryset_list, 10) 
+	#page_request_var = "page"
+	#page = request.GET.get(page_request_var)
+	#try:
+	#	queryset = paginator.page(page)
+	#except PageNotAnInteger:
 		# If page is not an integer, deliver first page.
-		queryset = paginator.page(1)
-	except EmptyPage:
+	#	queryset = paginator.page(1)
+	#except EmptyPage:
 		# If page is out of range (e.g. 9999), deliver last page of results.
-		queryset = paginator.page(paginator.num_pages)
+	#	queryset = paginator.page(paginator.num_pages)
 
 	context = {
-		"object_list": queryset,
+		"object_list": queryset_list,
 		"title": "List",
 		"today": today,
-		"page_request_var": page_request_var
+	#	"page_request_var": page_request_var
 	}
 	return render(request, "post_list.html", context)
 

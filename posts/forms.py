@@ -10,8 +10,8 @@ class PostForm(forms.ModelForm):
 			"image",
 			"draft",
 			"publish",
-			#"language",
-			#"source",
-			#"keywords",
-			#"summary"
+			"language",
+			"source",
+			"summary",
+			"community"
 		]
