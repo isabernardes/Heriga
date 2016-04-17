@@ -9,6 +9,10 @@ from django.utils.text import slugify
 def upload_location(instance, filename):
     return "%s/%s" %(instance.id, filename)
 
+#class CommunitiesManager(models.Manager):
+#	def active(self, *args, **kwargs):
+#		return super(CommunitiesManager, self).filter(community__slug=slug)
+
 class Communities(models.Model):
 	name = models.CharField(max_length=120)
 	slug = models.SlugField(unique=True)
@@ -32,6 +36,8 @@ class Communities(models.Model):
 
 	def get_absolute_url(self):
 		return reverse("communities:detail", kwargs={"slug": self.slug})
+
+	#objects = CommunitiesManager()
 
 
 def create_slug(instance, new_slug=None):

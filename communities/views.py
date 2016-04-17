@@ -5,6 +5,7 @@ from .forms import CommunitiesForm
 from .models import Communities
 from posts.models import Post
 from django.contrib import messages
+from django.db.models import Q
 
 def communities_create(request):
 	if not request.user.is_staff or not request.user.is_superuser:
@@ -27,7 +28,7 @@ def communities_detail(request, slug=None):
 	instance = get_object_or_404(Communities, slug=slug)
 
 	queryset = Post.objects.filter(community__slug=slug)
-
+	#queryset = Post.objects.active()
 
 	context = {
 		"object_list": queryset,
@@ -38,6 +39,12 @@ def communities_detail(request, slug=None):
 
 def communities_list(request):
 	queryset = Communities.objects.all()
+	query = request.GET.get("q")
+	if query:
+		queryset = queryset= queryset.filter(
+				Q(name__icontains=query)|
+				Q(description__icontains=query)
+				).distinct()
 	
 	context = {
 		"name": "List",
