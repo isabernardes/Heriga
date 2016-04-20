@@ -9,7 +9,10 @@ urlpatterns = [
     url(r'^about-us/$','posts.views.aboutus', name='aboutus'),
     url(r'^posts/', include('posts.urls', namespace='posts')),
     url(r'^communities/', include('communities.urls', namespace='communities')),
-    url(r'^signups/$', 'signups.views.SignUp', name='signup'),
+    url(r'^signups/$', 'signups.views.register', name='signup'),
+    url(r'^login/$', 'django.contrib.auth.views.login', name='login'),
+    url(r'^logout/$', 'signups.views.logout_page', name='logout'),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login'), # If user is not login it will redirect to login page
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
@@ -20,3 +23,4 @@ if settings.DEBUG:
                           document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
+

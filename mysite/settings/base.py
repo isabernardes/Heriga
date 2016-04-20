@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+import django.contrib.auth
+django.contrib.auth.LOGIN_URL = '/'
+
 
 # Application definition
 
