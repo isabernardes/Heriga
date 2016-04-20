@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block head %}Login{% endblock %}
+{% block content %}
+<div class="container">
+		<div class="sixteen columns">
+	   		 <div class="six columns offset-by-three">
+    {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+    <form method="post" action=".">{% csrf_token %}
+        <table border="0">
+            <tr><th><label for="id_username">Username:</label></th><td>{{ form.username }}</td></tr>
+            <tr><th><label for="id_password">Password:</label></th><td>{{ form.password }}</td></tr>
+        </table>
+        <center>
+		<input type="submit" value="Login" />
+		<input type="hidden" name="next" value="/" />
+        </center>
+    </form>
+    <br/>
+    <br />
+    
+    <center>
+	    <a href="/signups">Register</a>
+    </center>
+    </div>
+		</div>
+	</div>
+{% endblock %}

@@ -6,10 +6,13 @@ from .models import Communities
 from posts.models import Post
 from django.contrib import messages
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 def communities_create(request):
-	if not request.user.is_staff or not request.user.is_superuser:
-		raise Http404
+	#if not request.user.is_staff or not request.user.is_superuser:
+	#	raise Http404
 	form =CommunitiesForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
 		instance = form.save(commit=False)
@@ -52,10 +55,10 @@ def communities_list(request):
 	}
 	return render(request, "communities_list.html", context)
 
-
+@login_required
 def communities_update(request, slug =None):
-	if not request.user.is_staff or not request.user.is_superuser:
-		raise Http404
+	#if not request.user.is_staff or not request.user.is_superuser:
+	#	raise Http404
 	instance = get_object_or_404(Communities, slug =slug)
 	form = CommunitiesForm(request.POST or None, request.FILES or None, instance=instance)
 	if form.is_valid():
@@ -71,10 +74,10 @@ def communities_update(request, slug =None):
 
 	return render(request, "communities_form.html", context)
 
-
+@login_required
 def communities_delete(request, slug=None):
-	if not request.user.is_staff or not request.user.is_superuser:
-		raise Http404
+	#if not request.user.is_staff or not request.user.is_superuser:
+	#	raise Http404
 	instance = get_object_or_404(Communities, slug =slug)
 	messages.success(request, "Successfully Deleted")
 	instance.delete()
