@@ -3,6 +3,8 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 
+from signups.views import *
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'posts.views.home', name='homepage'),
@@ -13,6 +15,7 @@ urlpatterns = [
     url(r'^login/$', 'django.contrib.auth.views.login', name='login'),
     url(r'^logout/$', 'signups.views.logout_page', name='logout'),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'), # If user is not login it will redirect to login page
+    url(r'^register/success/$', register_success),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
