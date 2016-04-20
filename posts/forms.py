@@ -13,5 +13,7 @@ class PostForm(forms.ModelForm):
 			"language",
 			"source",
 			"summary",
-			"community"
+			"community",
+			"tags",
 		]
+

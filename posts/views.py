@@ -11,6 +11,7 @@ from .forms import PostForm
 from .models import Post
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
+#from taggit.models import Tag
 
 # Create your views here.
 
@@ -81,9 +82,18 @@ def post_detail(request, slug=None):
 							content = content_data,
 							parent = parent_obj,
 						)
+
 		return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
 
-
+	if request.method == "POST":
+		form = PostForm(request.POST)
+	
+	if form.is_valid():
+		obj = form.save(commit=False)
+		obj.user = request.user
+		obj.save()
+		# Without this next line the tags won't be saved.
+		form.save_m2m()
 
 	comments = instance.comments
 	context = {
@@ -92,8 +102,31 @@ def post_detail(request, slug=None):
 		"share_string": share_string,
 		"comments": comments,
 		"comment_form":form,
+		"tags": tags
 	}
+
+	extra_context={
+            'objects':Post.objects.all(),
+        } 
+
 	return render(request, "post_detail.html", context)
+
+def tags(request, tag):
+    data = {'posts': Post.objects.filter(tags__name__in=[tag])}
+
+    return render(request, 'posts_detail.html', data)
+
+
+def get_posts_by_tag(request, tag_slug, selected_page=1):
+    posts = Post.objects.filter(published='True', tags__name__in=[tag_slug.replace('-', ' ')])
+    
+    pages = Paginator(posts, 5)
+    
+    returned_page = pages.page(selected_page)
+    
+    return render_to_response('posts/post_detail.html', { 'page_obj': returned_page, })
+
+
 
 def post_list(request):
 	today = timezone.now().date()
@@ -109,23 +142,11 @@ def post_list(request):
 				Q(user__first_name__icontains=query) |
 				Q(user__last_name__icontains=query)
 				).distinct()
-	#paginator = Paginator(queryset_list, 10) 
-	#page_request_var = "page"
-	#page = request.GET.get(page_request_var)
-	#try:
-	#	queryset = paginator.page(page)
-	#except PageNotAnInteger:
-		# If page is not an integer, deliver first page.
-	#	queryset = paginator.page(1)
-	#except EmptyPage:
-		# If page is out of range (e.g. 9999), deliver last page of results.
-	#	queryset = paginator.page(paginator.num_pages)
 
 	context = {
 		"object_list": queryset_list,
 		"title": "List",
 		"today": today,
-	#	"page_request_var": page_request_var
 	}
 	return render(request, "post_list.html", context)
 

@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-
+from taggit.managers import TaggableManager
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -42,6 +42,7 @@ class Post(models.Model):
     language = models.CharField(max_length=120)
     source = models.CharField(max_length=120)
     summary = models.CharField(max_length=120)
+    tags = TaggableManager(blank=True)
     
 
     objects = PostManager()
