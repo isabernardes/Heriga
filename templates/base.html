@@ -38,6 +38,10 @@
 <style>
 {% block style %}{% endblock style %}
 </style>
+
+{% block head_extra %} 
+
+{% endblock head_extra %}
 </head>
 <body>
 
@@ -79,7 +83,6 @@
         event.preventDefault();
         $(this).parent().next(".comment-reply").fadeToggle();
     })
-
 
 </script>
 </body>

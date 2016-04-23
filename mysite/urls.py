@@ -16,6 +16,8 @@ urlpatterns = [
     url(r'^logout/$', 'signups.views.logout_page', name='logout'),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'), # If user is not login it will redirect to login page
     url(r'^register/success/$', register_success),
+    url(r'^comments/', include('comments.urls', namespace='comments')),
+
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

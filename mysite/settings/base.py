@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'comments',
     'communities',
     'signups',
-    'taggit'
+    'taggit',
+    'pagedown'
 ]
 
 MIDDLEWARE_CLASSES = [
