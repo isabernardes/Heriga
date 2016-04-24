@@ -31,6 +31,12 @@
 					{% if obj.user.get_full_name %}<p>Author:{{ obj.user.get_full_name }}</p>{% endif %}
 					{{ obj.content |linebreaks|truncatechars:120}}<br/>
 					{{ obj.publish }}<br/>
+					 {% if obj.tags %}<p>Labels:
+                        {% for tag in obj.tags.all %}
+                            <a href="/posts/tag/{{ tag }}">{{ tag.name }}</a>
+                    			{% if not forloop.last %},{% endif%}
+                    			 {% endfor %}
+                     		</p>{% endif %}
 
 					<a class="button" href='{{ obj.get_absolute_url}}'>View</a>
 				</div>

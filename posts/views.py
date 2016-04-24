@@ -105,22 +105,20 @@ def post_detail(request, slug=None):
 	return render(request, "post_detail.html", context)
 
 def tags(request, tag):
-	queryset_tags = Post.objects.filter(tags__name__in=[tag])
+	posts = Post.objects.filter(tags__name=tag)
 	context={
-            'posts': queryset_tags,
+            'posts': posts,
+            'tag':tags,
         } 
-	return render(request, "post_detail.html", context)
-
-
-def tags_list(request, tag_slug=None):
-	tags_list = Post.objects.filter(published='True', tags__name__in=[slug])
-	pages = Paginator(posts, 5)
-	returned_page = pages.page(selected_page)
-	context= {
-		'page_obj': returned_page,
-		'tags_list':tags_list
-	}
 	return render(request, "tags_list.html", context)
+
+
+#def tags_list(request, tag_slug=None):
+#	tags_list = Post.objects.filter(published='True', tags__name__in=[slug])
+#	context= {
+#		'tags_list':tags_list
+#	}
+#	return render(request, "tags_list.html", context)
 
 
 
