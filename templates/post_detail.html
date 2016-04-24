@@ -35,7 +35,7 @@ Twitter</a>
                  
                      {% if instance.tags %}<p>Labels:
                         {% for tag in instance.tags.all %}
-                            <a href="{{ tag }}">{{ tag.name }}</a>
+                            <a href="posts/tag/{{ tag }}">{{ tag.name }}</a>
                     {% if not forloop.last %},{% endif%}
                      {% endfor %}
                      </p>{% endif %}

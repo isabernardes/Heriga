@@ -10,8 +10,12 @@
 {% block content %}
 
 
+{% for post in posts %}
 
-<p>hello</p>
+
+<p>Posts for {% for tag in post.object.all %}{{ tag }}{% endfor %}: <a href="/posts/{{ posts.slug }}">{{ post.title }}</a></p>
+
+{% endfor %}
 
 
 
