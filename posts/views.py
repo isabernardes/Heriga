@@ -4,24 +4,23 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.db.models import Q
-#from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from comments.forms import CommentForm
 from comments.models import Comment
 from .forms import PostForm
 from .models import Post
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
-#from taggit.models import Tag
+from communities.models import Communities
+from taggit.models import Tag
 
-# Create your views here.
 
 def home(request):
-	queryset_one = Post.objects.filter(id=2)
-
+	queryset_one = Post.objects.all().order_by("-timestamp")[:1]
+	#queryset_two = Communities.objects.all().order_by("-timestamp")[:3]
 	context = {
 		"object_list": queryset_one,
+		#"object_list":queryset_two
 	}
-
 
 	return render (request, "home.html", context)
 
@@ -36,6 +35,7 @@ def post_create(request):
 	if form.is_valid():
 		instance = form.save(commit=False)
 		instance.save()
+		form.save_m2m()
 		messages.success(request, "Successfully Created")
 		return HttpResponseRedirect(instance.get_absolute_url())
 	else:
@@ -57,6 +57,8 @@ def post_detail(request, slug=None):
 			"content_type": instance.get_content_type,
 			"object_id": instance.id
 	}
+
+	#FORM SAVE
 	form = CommentForm(request.POST or None, initial=initial_data)
 	if form.is_valid():
 		c_type = form.cleaned_data.get("content_type")
@@ -85,15 +87,6 @@ def post_detail(request, slug=None):
 
 		return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
 
-	if request.method == "POST":
-		form = PostForm(request.POST)
-	
-	if form.is_valid():
-		obj = form.save(commit=False)
-		obj.user = request.user
-		obj.save()
-		# Without this next line the tags won't be saved.
-		form.save_m2m()
 
 	comments = instance.comments
 	context = {
@@ -112,19 +105,22 @@ def post_detail(request, slug=None):
 	return render(request, "post_detail.html", context)
 
 def tags(request, tag):
-    data = {'posts': Post.objects.filter(tags__name__in=[tag])}
+	queryset_tags = Post.objects.filter(tags__name__in=[tag])
+	context={
+            'posts': queryset_tags,
+        } 
+	return render(request, "post_detail.html", context)
 
-    return render(request, 'posts_detail.html', data)
 
-
-def get_posts_by_tag(request, tag_slug, selected_page=1):
-    posts = Post.objects.filter(published='True', tags__name__in=[tag_slug.replace('-', ' ')])
-    
-    pages = Paginator(posts, 5)
-    
-    returned_page = pages.page(selected_page)
-    
-    return render_to_response('posts/post_detail.html', { 'page_obj': returned_page, })
+def tags_list(request, tag_slug=None):
+	tags_list = Post.objects.filter(published='True', tags__name__in=[slug])
+	pages = Paginator(posts, 5)
+	returned_page = pages.page(selected_page)
+	context= {
+		'page_obj': returned_page,
+		'tags_list':tags_list
+	}
+	return render(request, "tags_list.html", context)
 
 
 
@@ -159,13 +155,18 @@ def post_update(request, slug=None):
 	if form.is_valid():
 		instance = form.save(commit=False)
 		instance.save()
+		form.save_m2m()
 		messages.success(request, "<a href='#'>Item</a> Saved", extra_tags='html_safe')
-		return HttpResponseRedirect(instance.get_absolute_url())
+		return HttpResponseRedirect(instance.get_absolute_url())			
+
 	context = {
 		"title": instance.title,
 		"instance":instance,
 		"form":form,
+		"tags":tags
 	}
+
+	
 
 	return render(request, "post_form.html", context)
 	

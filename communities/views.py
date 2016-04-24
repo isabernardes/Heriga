@@ -21,6 +21,7 @@ def communities_create(request):
 		return HttpResponseRedirect(instance.get_absolute_url())
 	else:
 		messages.error(request, "Not Successfully Created")
+	
 	context = {
 		"form": form,
 	}
