@@ -104,12 +104,16 @@ def post_detail(request, slug=None):
 
 	return render(request, "post_detail.html", context)
 
-def tags(request, slug):
-	posts = Post.objects.filter(tags__name=slug)
+def tags(request, tag):
+	posts = Post.objects.filter(tags__name=tag)
+	name = Post.objects.all(),
 	context={
             'posts': posts,
-            'tag':tags,
+            'tags':tag,
+            'name': tag,
         } 
+
+ 
 	return render(request, "tags_list.html", context)
 
 

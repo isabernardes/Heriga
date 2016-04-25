@@ -1,19 +1,20 @@
 {% extends "base.html" %}
+
 {% load urlify %}
 
 
 {% block head_title %}
-{{ instance.title }} | {{ block.super }} 
+ 
 {%  endblock head_title %}
 
 
 {% block content %}
+<h1>{{ name }}</h1>
 
 
 {% for post in posts %}
 
-
-<p>Posts for {% for tag in post.object.all %}{{ tag }}{% endfor %}: <a href="/posts/{{ posts.slug }}">{{ post.title }}</a></p>
+<p><a href="/posts/{{ post.slug }}">{{ post.title }}</a></p>
 
 {% endfor %}
 
