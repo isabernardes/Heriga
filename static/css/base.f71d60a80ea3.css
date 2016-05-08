@@ -1,0 +1,101 @@
+body {
+    font-family: 'Advent Pro';
+}
+
+p {
+   font-size: 20px; 
+}
+
+
+/* Navbar */
+.navbar-default {
+    background-color:#FFCC80;
+    border-radius: 0;
+    border: none !important; 
+    padding: 20px;
+    margin:0;
+}
+
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form,
+.navbar-default .glyphicon {  
+  border:none;
+}
+
+.nav.navbar-nav.navbar-right li a {
+    color:#ffffff;
+    text-align: center;
+    font-family: 'Advent Pro';
+}
+
+.nav.navbar-nav.navbar-right li a:hover,
+.nav.navbar-nav.navbar-right li a:active  {
+    text-decoration: underline;
+}
+
+.navbar.navbar-default .navbar-header a {
+    color:#ffffff;
+    font-size: 40px;
+    padding-left: 50px;
+}
+
+.navbar.navbar-default a {
+    color:#ffffff;
+    font-size: 20px;
+}
+
+.navbar-toggle {
+    border: none !important; 
+    background: #ffffff !important;    
+}
+
+.glyphicon-search {
+    border: none !important; 
+    color:white;
+    text-align: center;
+}
+
+.btn.btn-default {
+    border: none !important; 
+    background-color: #FFCC80;
+    border-color:#FFCC80;
+    float: center;
+}
+
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #FFCC80;
+    border-color:#FFCC80;
+    border: none !important; 
+}
+
+
+/* Grid */
+
+.col-md-6 img {
+    margin: 0px !important;
+    padding: 0px!important;
+    width: 100%;
+    height: auto;
+    display:block;
+
+}
+
+.container-fluid {
+    margin:0px;
+    padding: 0px;
+}
+
+
+.col-md-12 {
+    background-color:#DB7E52; 
+    text-align: center;
+    color: #ffffff;
+    height: 400px;
+}
+
+
+
+
+    
+    

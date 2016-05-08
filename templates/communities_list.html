@@ -1,43 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container">
-		<div class="sixteen columns">
-	   		 <div class="six columns offset-by-three">
-	   		 	
-<h1>Communities</h1>
 
-<form method='GET' action=''>
-<input type='text' name='q' placeholder='Search communities' value='{{ request.GET.q }}'/>
-<input type='submit' value='Search' />
-</form>
-<a class="button" href='{% url "communities:communities_create" %}'>Create Community</a>
-
-</div>
-</div>
+<div class="row">
+	<div class='col-sm-12' style= "text-align:center">
+		<h1>Communities</h1></br>
+			<a class = "button" href='{% url "communities:communities_create" %}'><button style= "margin-bottom: 50px"; "text-align:center" type="button" class="btn btn-primary communities-btn">Create a Community</button></br></a>
+	</div>
 </div>
 
-{% for obj in  object_list %}
-
-	<div class="container">
-		<div class="sixteen columns">
-	   		 <div class="six columns offset-by-three">
-	   		 	<div class = "story">
-
-
+<div class='col-sm-9 col-sm-offset-3'>
+    <form method='GET' action='' class='row' style= "text-align:center">
+        <div class='col-sm-8'style= "text-align:center">
+           <div class='input-group' style= "text-align:center">
+                <input class='form-control' type='text' name='q' placeholder='Search communities' value='{{ request.GET.q }}'/>
+                	<span class='input-group-btn'>
+               			<button style="background-color:transparent"class='btn btn-default' type='submit'><i class="fa fa-search"></i></button>
+                	</span>
+            </div>
+        </div>
+	</form>
+</div>
+	
+<div class="row" style= "margin-left:50px; margin-right:50px; margin-top:100px;">   		 	
+	{% for obj in  object_list %}
+		<div class="col-sm-4" style="text-align:center">
+			<div class="thumbnail">
 				<a href = '{{ obj.get_absolute_url}}'><h2>{{ obj.name }}</h2></a></br>
-				<p>{{ obj.description }}</p> </br>
+				<p>{{ obj.description | truncatechars:20 }}</p> </br>
 				{% if obj.image %}
-					<img class = "u-max-full-width" src = '{{ obj.image.url }}'>
-					{% endif %}
-
-				<a class="button" href=''>View</a>
-
-				</div>
+					<img class = "img-responsive" src = '{{ obj.image.url }}'>
+				{% endif %}
 			</div>
 		</div>
-	</div>
-
 {% endfor %}
+</div>
 
 {% endblock content %}

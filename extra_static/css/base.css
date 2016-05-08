@@ -1,49 +1,256 @@
-.navbar {
+/* General */
 
-	display: block;
+{% load staticfiles %}
+
+
+body {
+    font-family: 'Advent Pro';
+}
+
+p {
+   font-size: 20px; 
+}
+
+
+/* Navbar */
+
+.navbar-default {
+    background-color:#FFCC80;
+    border-radius: 0;
+    border: none !important; 
+    padding: 20px;
+    margin:0;
+}
+
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form,
+.navbar-default .glyphicon {  
+  border:none;
+}
+
+.nav.navbar-nav.navbar-right li a {
+    color:#ffffff;
+    text-align: center;
+    font-family: 'Advent Pro';
+}
+
+.nav.navbar-nav.navbar-right li a:hover,
+.nav.navbar-nav.navbar-right li a:active  {
+    text-decoration: underline;
+}
+
+.navbar.navbar-default .navbar-header a {
+    color:#ffffff;
+    font-size: 40px;
+    padding-left: 50px;
+}
+
+.navbar.navbar-default a {
+    color:#ffffff;
+    font-size: 20px;
+}
+
+.navbar-toggle {
+    border: none !important; 
+    background: #ffffff !important;    
+}
+
+.glyphicon-search {
+    border: none !important; 
+    color:white;
+    text-align: center;
+}
+
+.btn.btn-default {
+    border: none !important; 
+    background-color: #FFCC80;
+    border-color:#FFCC80;
+    float: center;
+}
+
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #FFCC80;
+    border-color:#FFCC80;
+    border: none !important; 
+}
+
+
+/* Grid Homepage */
+
+
+.col-md-6  {
+    margin: 0px !important;
+    padding: 10px;
+    height: auto;
+    display:block;
+}
+
+.img-responsive {
     width: 100%;
-    height: 6.5rem;
-    background: #fff;
-    z-index: 99;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+}
+.container-fluid {
+    margin:0px;
+    padding: 0px;
+}
 
+.featured-story {
+    margin: 25px;
+    padding: 25px;
+}
+
+/*jumbotron*/
+
+.jumbotron {
+    background-color:#DB7E52; 
+    text-align: center;
+    color: #ffffff;
+    padding: 50px;
+    height:auto;
+    border-radius:0 !important;
 }
 
 
-.navbar-link {
-    text-transform: uppercase;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .2rem;
-    margin-right: 15px;
+/* img-circles */
+
+.pull-center {
+    text-align: center;
+}
+
+.communities {
+    display: relative;
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+}
+
+.img-circle {
+    height:200px;
+    width:200px;
+    overflow:hidden;
+    margin:5%;
+}
+
+/* buttons */
+
+.btn-info{
+background: transparent;
+color: #ffffff;
+background-color: #00A19C
+
+/* CSS Transition */
+    -webkit-transition: background .2s ease-in-out, border .2s ease-in-out;
+    -moz-transition: background .2s ease-in-out, border .2s ease-in-out;
+    -ms-transition: background .2s ease-in-out, border .2s ease-in-out;
+    -o-transition: background .2s ease-in-out, border .2s ease-in-out;
+    transition: background .2s ease-in-out, border .2s ease-in-out;
+    -webkit-border-radius: 0;
+    -moz-border-radius:    0;
+border-radius:   0;
+padding-left: 50px;
+padding-right: 50px;
+border-color: #ffffff; 
+
+}
+
+.jumbotron-btn {
+
+padding-left: 40px;
+padding-right: 40px;
+border-width: 2px
+}
+
+.btn-info:hover {
+border-color: #5A81A6; 
+background-color: #5A81A6; 
+}
+
+
+.btn-primary {
+background:  transparent; 
+border-color: #DB7E52; 
+  -webkit-border-radius: 0;
+  -moz-border-radius:    0;
+border-radius:         0;
+padding-left: 50px;
+padding-right: 50px;
+color:#DB7E52;
+border-width: 2px
+}
+
+.btn-primary:hover {
+  border-color: #DB7E52; 
+  background-color: #DB7E52; 
+}
+
+/* Footer*/
+
+.footer {
+    width: 100%;
+    height: auto;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.social {
+    margin: 0;
+    padding: 0;
+}
+
+.social ul {
+    margin: 0;
+    padding: 5px;
+}
+
+.social ul li {
+    margin: 5px;
+    list-style: none outside none;
+    display: inline-block;
+}
+
+.social i {
+    width: 40px;
+    height: 40px;
+    color: #FFF;
+    background-color: #909AA0;
+    font-size: 22px;
+    text-align:center;
+    padding-top: 12px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -o-border-radius: 50%;
+    transition: all ease 0.3s;
+    -moz-transition: all ease 0.3s;
+    -webkit-transition: all ease 0.3s;
+    -o-transition: all ease 0.3s;
+    -ms-transition: all ease 0.3s;
+}
+
+.social i:hover {
+    color: #FFF;
     text-decoration: none;
-    line-height: 6.5rem;
-    color: #222;
-   }
-
-
-.navbar-list {
-    list-style: none;
-    float: right;
+    transition: all ease 0.3s;
+    -moz-transition: all ease 0.3s;
+    -webkit-transition: all ease 0.3s;
+    -o-transition: all ease 0.3s;
+    -ms-transition: all ease 0.3s;
 }
 
-.story{
-	border: 1px solid 	#E8E8E8 ;
-	margin: 10px;
-	padding:10px;
-    outline-color: 	#E8E8E8 ;
-
+.social .fa-facebook:hover { /* round facebook icon*/
+    background: #4060A5;
 }
 
-.button{
-	margin: 10px;	
+.social .fa-twitter:hover { /* round twitter icon*/
+    background: #00ABE3;
 }
 
-h1 {
-	align: center;
+.social .fa-google-plus:hover { /* round google plus icon*/
+    background: #e64522;
 }
 
-.comment-reply{
-    display:none;
+
+/*Post Form */
+input[type=file] {
+    display: inline!important;
 }

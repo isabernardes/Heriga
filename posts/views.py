@@ -16,10 +16,10 @@ from taggit.models import Tag
 
 def home(request):
 	queryset_one = Post.objects.all().order_by("-timestamp")[:1]
-	#queryset_two = Communities.objects.all().order_by("-timestamp")[:3]
+	queryset_two = Communities.objects.all().order_by("-timestamp")[:3]
 	context = {
-		"object_list": queryset_one,
-		#"object_list":queryset_two
+		"queryset_story": queryset_one,
+		"queryset_community":queryset_two
 	}
 
 	return render (request, "home.html", context)
@@ -112,18 +112,8 @@ def tags(request, tag):
             'tags':tag,
             'name': tag,
         } 
-
  
 	return render(request, "tags_list.html", context)
-
-
-#def tags_list(request, tag_slug=None):
-#	tags_list = Post.objects.filter(published='True', tags__name__in=[slug])
-#	context= {
-#		'tags_list':tags_list
-#	}
-#	return render(request, "tags_list.html", context)
-
 
 
 def post_list(request):
@@ -167,8 +157,6 @@ def post_update(request, slug=None):
 		"form":form,
 		"tags":tags
 	}
-
-	
 
 	return render(request, "post_form.html", context)
 	

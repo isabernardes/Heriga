@@ -1,25 +1,14 @@
 {% extends "base.html" %}
-
 {% load urlify %}
-
-
 {% block head_title %}
- 
 {%  endblock head_title %}
-
-
 {% block content %}
-<h1>{{ name }}</h1>
-
-
-{% for post in posts %}
-
-<p><a href="/posts/{{ post.slug }}">{{ post.title }}</a></p>
-
-{% endfor %}
-
-
-
-
-
+<div class='container'>
+	<div class="col-sm-12" style= "text-align:center">
+		<h1>{{ name }}</h1>
+		{% for post in posts %}
+			<p><a href="/posts/{{ post.slug }}">{{ post.title }}</a></p>
+	</div>
+</div>
+		{% endfor %}
 {% endblock content %}

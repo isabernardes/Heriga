@@ -1,0 +1,40 @@
+* {
+    margin:0;
+    padding:0;
+}
+
+
+.logo {
+    padding: 20px;
+    float: left;
+}
+
+nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #FFCD79;
+    display: block;
+    width: 100%;
+
+}
+
+nav > ul {
+    font-family: 'Open Sans';
+}
+
+nav > ul > li {
+    float:right;
+    padding-top: 35px;
+    list-style-type: none;
+    font-family: 'Open Sans';
+}
+
+nav > ul > li > a {
+    color: #ffffff;
+    padding:30px;
+    text-decoration: none;
+    font-family: "Open Sans";
+
+}

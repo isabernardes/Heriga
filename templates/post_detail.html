@@ -1,59 +1,43 @@
 {% extends "base.html" %}
 {% load urlify %}
-
-
 {% block head_title %}
 {{ instance.title }} | {{ block.super }} 
 {%  endblock head_title %}
-
-
 {% block content %}
 
+<div class='container'>
+  	<div class="col-sm-6 col-sm-offset-3" style="margin-top:30px;"> 
+  	 {% if instance.image %}
+  	   	<img class = "img-responsive" src = '{{ instance.image.url }}'>
+      {% endif %}
+  			<h1>{{title}}</h1><p>{% if instance.draft %} <span style= 'color:red'>Draft</span>{% endif %} {{ instance.publish }}</p>	
+  			<p>Author: {{ instance.user }}</p>
+        <p>Community: {{ instance.community }}</p>
+        <p><div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div><hr/></p>
+  			<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.built_absolute_uri }}">
+  Facebook</a>
+  			<a href="https://twitter.com/home?status={{ instance.content|truncatechars:80|urlify }}%20{{ request.built_absolute_uri }}">
+  Twitter</a>
+  			<a href='https://plus.google.com/share?url={{ request.built_absolute_uri }}'>GooglePlus</a>
+  			<p>{{ instance.content |linebreaks }}</p><br/>
+        <p>Language:{{ instance.language }}</p><br/>
+        <p>Source:{{ instance.source }}</p><br/>
+        <p>Summary:{{ instance.summary }}</p><br/>
+        {% if instance.tags %}
+          <p>Labels:
+        {% for tag in instance.tags.all %}
+          <a href="/posts/tag/{{ tag }}">{{ tag.name }}</a>
+          {% if not forloop.last %},{% endif%}
+          {% endfor %}</p>{% endif %}
+  </div>
+</div>
 
-	<div class="container">
-		<div class="sixteen columns">
-	   		 <div class="six columns offset-by-three"> 
-	   		 {% if instance.image %}
-	   		  <img class = "u-max-full-width" src = '{{ instance.image.url }}'>
-            {% endif %}
-				<h1>{{title}}</h1><p>{% if instance.draft %} <span style= 'color:red'>Draft</span>{% endif %} {{ instance.publish }}</p>	
-				<p>Author: {{ instance.user }}</p>
-                <p>Community: {{ instance.community }}</p>
-                <p><div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div><hr/></p>
-					<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.built_absolute_uri }}">
-Facebook</a>
-					<a href="https://twitter.com/home?status={{ instance.content|truncatechars:80|urlify }}%20{{ request.built_absolute_uri }}">
-Twitter</a>
-					<a href='https://plus.google.com/share?url={{ request.built_absolute_uri }}'>GooglePlus</a>
-
-
-
-					<p>{{ instance.content |linebreaks }}</p><br/>
-                    s<p>Language:{{ instance.language }}</p><br/>
-                    <p>Source:{{ instance.source }}</p><br/>
-                    <p>Summary:{{ instance.summary }}</p><br/>
-                 
-                     {% if instance.tags %}<p>Labels:
-                        {% for tag in instance.tags.all %}
-                            <a href="/posts/tag/{{ tag }}">{{ tag.name }}</a>
-                    {% if not forloop.last %},{% endif%}
-                     {% endfor %}
-                     </p>{% endif %}
-
-
-
-			</div>
-		</div>
-	</div>
-
-	<div class="container">
-		<div class="sixteen columns">
-	   		 <div class="six columns offset-by-three"> 
-
+<div class="container">
+		<div class="col-sm-6 col-sm-offset-3">
         <p class='lead'>Comments</p>
         <form method="POST" action="."> {% csrf_token %}
-            {{ comment_form }}
-            <input type='submit' value='Post comment' class='btn btn-default'>
+            {{ comment_form }} </br>
+            <input type='submit' value='Post comment' class='btn btn-primary'>
         </form>
         <hr/>
         {% for comment in comments %}
@@ -71,8 +55,7 @@ Twitter</a>
 
             <form method="POST" action="."> {% csrf_token %}
                 {{ comment_form }}
-                <input type='hidden' name='parent_id' value='{{ comment.id }}'>
-                <input type='submit' value='Reply' class='btn btn-default'>
+                <input type='hidden' name='parent_id' value='{{ comment.id }}'></br>
             </form>
         </div>
 
@@ -86,8 +69,5 @@ Twitter</a>
 
 
 </div>
-</div>
-</div>
-
 
 {% endblock content %}

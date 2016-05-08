@@ -5,15 +5,20 @@
 
 {% block content %}
 
-	<h1>Create an account</h1>
-	<div class="container">
-		<div class="sixteen columns">
-	   		 <div class="six columns offset-by-three">
+<div class="row">
+	<div class='col-sm-12' style= "text-align:center">
+		<h1>Create an account</h1></br>
+	</div>
+</div>
+
+<div class='col-sm-9 col-sm-offset-4'>
+	<div class="row">
+		<div class="col-sm-12">
 			<form action="." method="post" enctype='multipart/form-data' >{% csrf_token %}
 				{{ form.as_p }}
       		<input type="submit" value="Create account" />
-	</form>
-	</div>
+			</form>
 		</div>
 	</div>
+</div>
 {% endblock %}

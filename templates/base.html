@@ -8,31 +8,34 @@
 <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Skeleton: Responsive CSS Boilerplate</title>
+  <title>HERIGA</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Advent+Pro' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Advent+Pro" /> 
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="{% static './css/css/normalize.css' %}">
-  <link rel="stylesheet" href="{% static './css/css/skeleton.css' %}">
+  <link rel="stylesheet" href="{% static './css/css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static './css/base.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
   <!-- Scripts
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="{% static './css/js/bootstrap.js' %}"></script>
+  
 
   <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="../../dist/images/favicon.png">
+  –––––––––––––––––––––––––––––––––––––––––––––––––– 
+  <link rel="icon" type="image/png" href="../../dist/images/favicon.png">-->
 
 
 <style>
@@ -45,30 +48,44 @@
 </head>
 <body>
 
-		<!--Navbar-->
-			<nav class = "navbar">
-		      <div class = "container">
-            <a class = "navbar-brand" href="#">
-              <img style="max-width:100px; margin-top: 5px;" src="{{ herigalogo.png }}">
-            </a>
-		        <ul class = "navbar-list">
-		          <li class = "navbar-item">
-		               <a class = "navbar-link" href='{% url "homepage" %}'> HOME</a>
-                  <a class = "navbar-link" href='{% url "posts:list" %}'> STORIES</a>
-                  <a class = "navbar-link" href='{% url "aboutus" %}'> ABOUT</a>
-                  <a class = "navbar-link" href='{% url "communities:communities_list" %}'> COMMUNITIES</a>
-                  <a class = "navbar-link" href='{% url "signup" %}'> SIGNUP</a>
-		          </li>
-		        </ul>
-		      </div>
-		    </nav>
 	
+<!-- Navbar -->
+ <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">MENU</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href='{% url "homepage" %}'>heriga</a>
+    </div> 
+    
+    <div class ="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+      <form class="navbar-form navbar-right" role="search" method='GET' action=''>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" name='q' value='{{ request.GET.q }}'>
+        </div>
+        <button type="submit" class="btn btn-default" value='Search'>
+          <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+        </button>
+      </form>
+
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href='{% url "homepage" %}'>home</a></li>
+        <li><a href='{% url "posts:list" %}'>stories</a></li>
+        <li><a href='{% url "communities:communities_list" %}'>communities</a></li>
+        <li><a href='{% url "signup" %}'>signup</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
 
 		{% include "messages_display.html" %}
-	<div class = 'container'>
 		{%  block content %}{%  endblock content %}
-	</div>
 
   <script type="text/javascript">
   (function(d, s, id) {
@@ -83,6 +100,19 @@
         event.preventDefault();
         $(this).parent().next(".comment-reply").fadeToggle();
     })
+
+$(document).ready(function(){
+    $(".content-markdown").each(function(){
+            var content = $(this).text()
+            console.log(content)
+            var markedContent = marked(content)
+            console.log(markedContent)
+            $(this).html(markedContent)
+    })
+    $(".content-markdown img").each(function(){
+            $(this).addClass("img-responsive");
+    })
+})
 
 </script>
 </body>

@@ -1,0 +1,176 @@
+/* General */
+
+body {
+    font-family: 'Advent Pro';
+}
+
+p {
+   font-size: 20px; 
+}
+
+
+/* Navbar */
+
+.navbar-default {
+    background-color:#FFCC80;
+    border-radius: 0;
+    border: none !important; 
+    padding: 20px;
+    margin:0;
+}
+
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form,
+.navbar-default .glyphicon {  
+  border:none;
+}
+
+.nav.navbar-nav.navbar-right li a {
+    color:#ffffff;
+    text-align: center;
+    font-family: 'Advent Pro';
+}
+
+.nav.navbar-nav.navbar-right li a:hover,
+.nav.navbar-nav.navbar-right li a:active  {
+    text-decoration: underline;
+}
+
+.navbar.navbar-default .navbar-header a {
+    color:#ffffff;
+    font-size: 40px;
+    padding-left: 50px;
+}
+
+.navbar.navbar-default a {
+    color:#ffffff;
+    font-size: 20px;
+}
+
+.navbar-toggle {
+    border: none !important; 
+    background: #ffffff !important;    
+}
+
+.glyphicon-search {
+    border: none !important; 
+    color:white;
+    text-align: center;
+}
+
+.btn.btn-default {
+    border: none !important; 
+    background-color: #FFCC80;
+    border-color:#FFCC80;
+    float: center;
+}
+
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #FFCC80;
+    border-color:#FFCC80;
+    border: none !important; 
+}
+
+
+/* Grid Homepage */
+
+.col-md-6  {
+    margin: 0px !important;
+    padding: 0px!important;
+    height: auto;
+    display:block;
+}
+
+.img-responsive {
+    width: 100%;
+}
+.container-fluid {
+    margin:0px;
+    padding: 0px;
+}
+
+.featured-story {
+    margin: 25px;
+    padding: 25px;
+}
+
+.jumbotron {
+    background-color:#DB7E52; 
+    text-align: center;
+    color: #ffffff;
+    padding-top: 50px;
+    height:400px;
+    border-radius:0 !important;
+}
+
+/* img-circles */
+
+.pull-center {
+    text-align: center;
+}
+
+.communities {
+    display: relative;
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+}
+
+.img-circle {
+    height:200px;
+    width:200px;
+    overflow:hidden;
+    margin:5%;
+}
+
+/* buttons */
+
+.btn-info{
+    background: transparent;
+    color: #ffffff;
+    background-color: #00A19C
+
+    /* CSS Transition */
+    -webkit-transition: background .2s ease-in-out, border .2s ease-in-out;
+    -moz-transition: background .2s ease-in-out, border .2s ease-in-out;
+    -ms-transition: background .2s ease-in-out, border .2s ease-in-out;
+    -o-transition: background .2s ease-in-out, border .2s ease-in-out;
+    transition: background .2s ease-in-out, border .2s ease-in-out;
+    -webkit-border-radius: 0;
+    -moz-border-radius:    0;
+    border-radius:         0;
+    padding-left: 50px;
+    padding-right: 50px;
+    border-color: #ffffff; 
+    
+
+}
+
+.navbar-btn {
+
+padding-left: 40px;
+padding-right: 40px;
+border-width: 2px
+}
+
+.btn-info:hover {
+  border-color: #00A19C; 
+  background-color: #00A19C; 
+}
+
+.btn-primary {
+  background:  #00A19C; 
+  border-color: #00A19C; 
+  -webkit-border-radius: 0;
+  -moz-border-radius:    0;
+  border-radius:         0;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.btn-primary:hover {
+  border-color: #00A19C; 
+  background-color: #00A19C; 
+}
+
+

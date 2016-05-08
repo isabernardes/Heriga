@@ -1,51 +1,149 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-
 {% block content %}
 
-<div class="container">
-		<div class="sixteen columns">	 
-				<h1>Welcome to Heriga</h1>
-				<a class="button" href='{% url "posts:create" %}'>Tell a story</a>
-				<a class="button" href='{% url "communities:communities_create" %}'>Create Community</a>
+
+<div class ="container-fluid">
+	{% for obj in  queryset_story %}
+		<div class="col-md-6" style= "padding:0px;">
+        	{% if obj.image %}
+				<img class = "img-responsive" src = '{{ obj.image.url }}' >
+			{% endif %}
 		</div>
+		<div class="col-md-6" style= "padding:0px;" >
+			<div class = "featured-story">
+				<h2><a href = '{{ obj.get_absolute_url}}'>{{ obj.title }}</a></h2><br/>
+					{% if obj.user.get_full_name %}
+						<p>by:{{ obj.user.get_full_name }}</p>
+					{% endif %}		
+					{% if obj.draft %}
+						<h3>Staff only: Draft</h3>
+					{% endif %}
+					{% if obj.publish > today %}
+						<h3>Staff Only: Future Post</h3>
+					{% endif %}
+					<p>{{ obj.content |truncatechars:300}}</p> <br/>
+					<p><a href='{{ obj.get_absolute_url}}'>read more</a></p>
+			</div>
+		</div>	
+	{% endfor %}
 </div>
 
-{% for obj in  object_list %}
+	<div class="container-fluid">
+  		<div class="jumbotron" style= "margin: 0px">
+    		<h1>Share your Heritage</h1> 
+    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> 
+    			<a class = "button" href='{% url "posts:create" %}'><button type="button" class="btn btn-info jumbotron-btn">TELL YOUR STORY</button></a>
+   		</div>
+	</div>
 
-	<div class="container">
-		<div class="sixteen columns">
-	   		 <div class="six columns offset-by-three">
-	   		 	<div class = "story">
-					<a href = '{{ obj.get_absolute_url}}'>{{ obj.title }}</a><br/>
-					{% if obj.image %}
-					<img class = "u-max-full-width" src = '{{ obj.image.url }}'>
-					{% endif %}
-					{% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
-					{% if obj.user.get_full_name %}<p>Author:{{ obj.user.get_full_name }}</p>{% endif %}
-					{{ obj.content |linebreaks|truncatechars:120}}<br/>
-					{{ obj.publish }}<br/>
-					<a class="button" href='{{ obj.get_absolute_url}}'>View</a>
+	<div class="container-fluid">
+  		<img style= "margin-top:0px; padding-top: 0px" class= "img-responsive" src="{% static 'css/images/roma.jpg' %}">
+	</div>
+
+
+
+
+	<div class = "container">
+
+		<div class ="row">
+			<div class="col-md-12">
+				<div class="pull-center">
+					<h1>Join your Community</h1>
 				</div>
+			</div>
+		</div>
+
+
+		<div class ="row">
+			{% for obj in  queryset_community %}	
+				<div class="col-md-4">
+					<div class ="communities">
+						<h1><a href = '{{ obj.get_absolute_url}}'>{{ obj.name }}</h1></a></br>
+						{% if obj.image %}
+						<img class = "img-circle" src = '{{ obj.image.url }}' alt="thumbnail"; >
+						{% endif %}
+						<p>{{ obj.description |truncatechars:50}}</p></br>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	
+
+		<div class ="row" style= "text-align:center; margin-bottom: 50px;">
+			<div class="col-md-12">
+				<a class = "button" href='{% url "communities:communities_list" %}'><button type="button" class="btn btn-primary communities-btn">BROWSE COMMUNITIES</button></a>
 			</div>
 		</div>
 	</div>
 
-{% endfor %}
-
-{% for obj in  object_list %}
-<div class="container">
-<div class="sixteen columns">
-	   		 <div class="six columns offset-by-three">
-	   		 	<div class = "story">
-				<h2>{{ obj.name }}</h2></br>
-				<p>{{ obj.description }}</p> </br>
-
-				<a class="button" href=''>View</a>
-
-   	</div>
+	<div class="container-fluid" style= "background-color: #5A81A6;">
+		<div class="row" style= "padding:100px">
+			<div class="col-md-6"><h1>About Heriga</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+			<div class="col-md-6">
+				<img style= "margin:0px; padding: 0px" class= "img-responsive" src="{% static 'css/images/roma.jpg' %}">
 			</div>
 		</div>
-</div>
-        {% endfor %}
+	</div>
+
+	<div class="container-fluid" style= "background-color: #5A81A6;" >
+		<div class="row" style= "padding:100px"; "text-align:center">
+			<div class="col-md-6" style= "margin-left:10px";>
+				<img class= "img-responsive" src="{% static 'css/images/roma.jpg' %}">
+			</div>
+			
+			<div class="col-md-6"><h1>Another About</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+		</div>
+	</div>
+
+
+	<footer class="footer">
+		<div class="container-fluid">
+			<div class="col-md-4">
+				<h2>Contact us</h2></br>
+				<P>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</P>
+				<p>Email@aegis.com</p>
+			</div>
+
+			
+			<div class="col-md-4">
+				<div class = "social">
+				  	<h2>Follow us</h2></br>
+				  		<ul>
+							<li><a href ="#"><i class="fa fa-facebook fa-3x"></i></a></li><br>
+							<li><a href ="#"><i class="fa fa-twitter fa-3x"></i></a></li>
+							<li><a href ="#"><i class="fa fa-google-plus fa-3x"></i>	</a></li>
+						</ul><br>
+				</div>
+			</div>
+				  			
+			<div class="col-md-4">
+				<h2>Subscribe</h2></br>
+				  	<div class="input-group">
+				      	<input type="text" class="form-control" placeholder="Email">
+				      	<span class="input-group-btn">
+				        	<button style= "background:transparent" class="btn btn-default" type="button">
+				        		<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+				        	</button>
+				      	</span>
+				   	</div>
+			</div>
+		</div>
+				 
+			<div class= "container-fluid" style="background-color:#000000" "margin:0px;">
+				<div class="row" style= "text-align:center">
+				  	<div style= "color:#ffffff"; "font-size: 9px" class="col-md-12">
+				  		<p>2016 © Heriga. All rights reserved<p>
+				  	</div>
+				</div>	
+			</div>
+
+
+	</footer>
+
+
 {% endblock content %}

@@ -14,8 +14,6 @@
 
 
 <div class='col-sm-6 col-sm-offset-3'>
-
-        
           <p>{{ comment.content }}</p>
           <footer>via {{ comment.user }} | {{ comment.timestamp|timesince }} ago | {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %} {% endif %} {% if request.user == comment.user %}<a href='{{ comment.get_delete_url }}'>Delete</a> {% endif %}</footer>
           <hr/>
@@ -30,7 +28,7 @@
             <form method="POST" action="."> {% csrf_token %}
                 {{ form }}
                 <input type='hidden' name='parent_id' value='{{ comment.id }}'>
-                <input type='submit' value='Reply' class='btn btn-default'>
+                <input type='submit' value='Reply' class='btn btn-primary'>
             </form>
         </div>
 
