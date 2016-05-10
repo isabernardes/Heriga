@@ -38,6 +38,8 @@
 					<p class='content-markdown'>{{ obj.content }}</p>
 					{{ obj.content |linebreaks|truncatechars:120}}<br/>
 					{{ obj.publish }}<br/>
+                    <p><a href= "/posts/like/{{ obj.slug }}">{{ obj.likes }} Likes<p/>
+                    </a>
 					 {% if obj.tags %}<p>Labels:
                         {% for tag in obj.tags.all %}
                     <a href="/posts/tag/{{ tag }}">{{ tag.name }}</a>

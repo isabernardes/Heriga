@@ -115,8 +115,19 @@ def tags(request, tag):
  
 	return render(request, "tags_list.html", context)
 
+def like_posts(request, slug):
+	if slug:
+		a = Post.objects.get(slug=slug)
+		count = a.likes
+		count += 1
+		a.likes = count
+		a.save()
+		
 
-def post_list(request):
+	return HttpResponseRedirect("/posts/%s" %  slug)
+
+
+def post_list(request, slug=None):
 	today = timezone.now().date()
 	queryset_list = Post.objects.active()#.order_by("-timestamp")
 	if request.user.is_staff or request.user.is_superuser:
