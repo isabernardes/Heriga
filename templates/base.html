@@ -32,6 +32,7 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="{% static './css/js/bootstrap.js' %}"></script>
   
+  
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– 
@@ -101,18 +102,25 @@
         $(this).parent().next(".comment-reply").fadeToggle();
     })
 
-$(document).ready(function(){
-    $(".content-markdown").each(function(){
-            var content = $(this).text()
-            console.log(content)
-            var markedContent = marked(content)
-            console.log(markedContent)
-            $(this).html(markedContent)
-    })
-    $(".content-markdown img").each(function(){
-            $(this).addClass("img-responsive");
-    })
-})
+
+
+
+// AJAX POST
+ //   $('a').click(function(){
+   //   console.log('am i called');
+
+     //   $.ajax({
+       //     type: "POST",
+         //   url: "/posts/like/",
+           // dataType: "json",
+          //  data: { "slug": $(".a").val() },
+           // success: function(context) {
+            //    alert(data.a);
+            //}
+        //});
+
+    //});
+
 
 </script>
 </body>

@@ -1,6 +1,10 @@
 from urllib import quote_plus
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect, Http404
+try:
+    from django.utils import simplejson as json
+except ImportError:
+    import json
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.db.models import Q
@@ -12,6 +16,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
 from communities.models import Communities
 from taggit.models import Tag
+from django.views.decorators.http import require_POST
 
 
 def home(request):
@@ -115,17 +120,40 @@ def tags(request, tag):
  
 	return render(request, "tags_list.html", context)
 
-def like_posts(request, slug):
-	if slug:
-		a = Post.objects.get(slug=slug)
-		count = a.likes
-		count += 1
-		a.likes = count
-		a.save()
-		
+#def like(request):
+#	if request.POST():
+#		a = Post.objects.get()
+#		count = a.likes
+#		count += 1
+#		a.likes = count
+#		a.save()
+#		context = {'a':a,}
+#		return HttpResponse(json.dumps(context), content_type='application/json')
+#	else:
+#		raise Http404
 
-	return HttpResponseRedirect("/posts/%s" %  slug)
+#def like(request):
+#   if request.method == 'POST':
+#        user = request.user
+#        slug = request.POST.get('slug', None)
+#        posts = get_object_or_404(Post, slug=slug)
 
+#        if posts.likes.filter(id=user.id).exists():
+            # user has already liked this company
+            # remove like/user
+#            posts.likes.remove(user)
+#            message = 'You disliked this'
+#        else:
+            # add a new like for a company
+#            posts.likes.add(user)
+#            message = 'You liked this'
+
+#    context = {
+#    'likes_count': posts.total_likes, 
+#    'message': message
+#    }
+    # use mimetype instead of content_type if django < 5
+#    return HttpResponse(json.dumps(context), content_type='application/json')
 
 def post_list(request, slug=None):
 	today = timezone.now().date()

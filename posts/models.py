@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.utils.text import slugify
 from comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import User
 
 
 
@@ -39,7 +40,7 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
     community = models.ForeignKey('communities.Communities', default = 1)
-    likes = models.IntegerField(default=0)
+    #likes = models.IntegerField(default=0)
     language = models.CharField(max_length=120)
     source = models.CharField(max_length=120)
     summary = models.CharField(max_length=120)
@@ -72,7 +73,6 @@ class Post(models.Model):
         instance = self
         content_type = ContentType.objects.get_for_model(instance.__class__)
         return content_type
-
 
 
 def create_slug(instance, new_slug=None):
