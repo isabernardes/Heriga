@@ -4,17 +4,16 @@
 
 <div class="row">
 	<div class='col-sm-12' style= "text-align:center">
-		<h1>{{ profile.user }}</h1></br>
-		<h1>{{ user.email }}</h1></br>
-		<h1>{{ profile.countryOfBirth }}</h1></br>
-		<h1>{{ profile.cityofResidence }}</h1></br>
-		<h1>{{ profile.countryofResidence }}</h1></br>
-	{% for user in user.userjob_set.all %}
-		<h1>{{ user.occupation }}</h1></br>
-	{% endfor %}
-	{% for user in user.userpictures_set.all %}{% if user.image %}
-		<img src='{{ user.image.url }}'/></br>{% endif %}
-	{% endfor %}
+			{% for user in user.userpicture_set.all %}{% if user.image %}</br>
+				<h1>This is {{ profile.user }} Profile</h1><img class= "img-responsive" src='{{ user.image.url }}'/></br>{% endif %}
+			{% endfor %}
+		<h1>Full Name</h1><p>{{ user.first_name }} {{ user.last_name }}</p></br>
+		<h1>E-mail</h1><p>{{ user.email }}</p></br>
+		<h1>Place of birth</h1><p>{{ profile.cityOfBirth }}, {{ profile.countryOfBirth}}, </p></br>
+		<h1>Location</h1><p>{{ profile.cityofResidence }}, {{ profile.countryofResidence }}</p></br>
+			<h1>Occupation</h1>{% for user in user.userjob_set.all %}
+				<p>{{ user.occupation }}</p>{% endfor %}
+			
 
 
 	</div>

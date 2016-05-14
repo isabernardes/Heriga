@@ -1,29 +1,38 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import userGeneralInformation, userJob, userQualifications, UserPictures
+from .models import UserGeneralInformation, UserJob, UserQualification, UserLanguage, UserPicture
 
-class userGeneralInformationAdmin(admin.ModelAdmin):	
+
+class UserGeneralInformationAdmin(admin.ModelAdmin):	
 	class Meta:
-		model = userGeneralInformation
+		model = UserGeneralInformation
 
-admin.site.register(userGeneralInformation, userGeneralInformationAdmin)
+admin.site.register(UserGeneralInformation, UserGeneralInformationAdmin)
 
-class userJobAdmin(admin.ModelAdmin):	
+class UserJobAdmin(admin.ModelAdmin):	
 	class Meta:
-		model = userJob
+		model = UserJob
 
-admin.site.register(userJob, userJobAdmin)
+admin.site.register(UserJob, UserJobAdmin)
 
-class userQualificationsAdmin(admin.ModelAdmin):	
+class UserQualificationAdmin(admin.ModelAdmin):	
 	class Meta:
-		model = userQualifications
+		model = UserQualification
 
-admin.site.register(userQualifications, userQualificationsAdmin)
+admin.site.register(UserQualification, UserQualificationAdmin)
 
-class PicturesAdmin(admin.ModelAdmin):	
+
+class UserLanguageAdmin(admin.ModelAdmin):	
 	class Meta:
-		model = UserPictures
+		model = UserLanguage
+
+admin.site.register(UserLanguage, UserLanguageAdmin)
 
 
-admin.site.register(UserPictures, PicturesAdmin)
+class UserPictureAdmin(admin.ModelAdmin):	
+	class Meta:
+		model = UserPicture
+
+
+admin.site.register(UserPicture, UserPictureAdmin)

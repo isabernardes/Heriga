@@ -15,7 +15,7 @@ def upload_location(instance, filename):
 	return "%s/%s" %(location, filename)
 
 
-class userGeneralInformation (models.Model):
+class UserGeneralInformation (models.Model):
 	user = models.OneToOneField(User)
 	dateofbirth = models.DateField(null=True, blank=True)
 	cityOfBirth  = models.CharField(max_length=50, null=True, blank=True)
@@ -27,14 +27,14 @@ class userGeneralInformation (models.Model):
 	def __unicode__(self, ):
 			return self.cityofResidence
 
-class userJob (models.Model):
+class UserJob (models.Model):
 	user = models.ForeignKey(User)
 	occupation = models.CharField(max_length=100, null=True, blank=True)
 	placeOfWork = models.CharField(max_length=100, null=True, blank=True)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True, null=True, blank=True)
 	
 
-class userQualifications (models.Model):
+class UserQualification (models.Model):
 	user = models.ForeignKey(User)
 	university = models.CharField(max_length=100, null=True, blank=True)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True, null=True, blank=True) 
@@ -42,7 +42,7 @@ class userQualifications (models.Model):
 	def __unicode__(self, ):
 			return self.university
 
-class userLanguages (models.Model):
+class UserLanguage (models.Model):
 	user = models.ForeignKey(User)
 	languages = models.CharField(max_length=50, null=True, blank=True)
 
@@ -50,7 +50,7 @@ class userLanguages (models.Model):
 			return self.languages	
 
 
-class UserPictures (models.Model):
+class UserPicture (models.Model):
 	user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
 	image = models.ImageField(upload_to=upload_location, 
             null=True, 
