@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="row">
+	<div class='col-sm-12' style= "text-align:center">
+		<h1>{{ profile.user }}</h1></br>
+		<h1>{{ user.email }}</h1></br>
+		<h1>{{ profile.countryOfBirth }}</h1></br>
+		<h1>{{ profile.cityofResidence }}</h1></br>
+		<h1>{{ profile.countryofResidence }}</h1></br>
+	{% for user in user.userjob_set.all %}
+		<h1>{{ user.occupation }}</h1></br>
+	{% endfor %}
+	{% for user in user.userpictures_set.all %}{% if user.image %}
+		<img src='{{ user.image.url }}'/></br>{% endif %}
+	{% endfor %}
+
+
+	</div>
+</div>
+{% endblock content %}

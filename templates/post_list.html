@@ -1,7 +1,11 @@
 {% extends "base.html" %}
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
+
+
 {% block content %}
+{% load staticfiles %}
 
-
+   
 
 <div class="row">
 	<div class='col-sm-12' style= "text-align:center">
@@ -43,30 +47,14 @@
                     {% if not forloop.last %},{% endif%}
                     {% endfor %}</p>{% endif %}
                     <a class="button" href='{{ obj.get_absolute_url}}'>View</a>
-			</div>
-   		</div>
+
+
+
   	</div><hr/>
 
-
-
-
 {% endfor %}
+
 </div>
 
-<!--<div class="pagination">
-    <span class="step-links">
-        {% if object_list.has_previous %}
-            <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
-        </span>
-
-        {% if object_list.has_next %}
-            <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
-        {% endif %}
-    </span>
 </div>
--->
 {% endblock content %}

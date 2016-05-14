@@ -30,8 +30,12 @@
   <!-- Scripts
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src='http://code.jquery.com/jquery-1.9.1.js'></script>
+  <script src='http://code.jquery.com/ui/1.11.4/jquery-ui.min.js'></script>
   <script src="{% static './css/js/bootstrap.js' %}"></script>
   
+
+ 
   
 
   <!-- Favicon
@@ -85,43 +89,46 @@
 </nav>
 
 
+
 		{% include "messages_display.html" %}
 		{%  block content %}{%  endblock content %}
 
-  <script type="text/javascript">
-  (function(d, s, id) {
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+<script src='{% static "css/js/django.csrf.js" %}'></script>
+
+<script>
+
+  {% block jquery %}
+  {% endblock jquery %}
+</script>
+
+<script type="text/javascript">
+(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
       js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-
     $(".comment-reply-btn").click(function(event){
         event.preventDefault();
         $(this).parent().next(".comment-reply").fadeToggle();
     })
 
-
-
-
-// AJAX POST
- //   $('a').click(function(){
-   //   console.log('am i called');
-
-     //   $.ajax({
-       //     type: "POST",
-         //   url: "/posts/like/",
-           // dataType: "json",
-          //  data: { "slug": $(".a").val() },
-           // success: function(context) {
-            //    alert(data.a);
-            //}
-        //});
-
-    //});
+$('#likes').click(function(){
+    var postid;
+    postid = $(this).attr("data-postid");
+    $.get('/like/', {posts_id: postid}, function(data){
+               $('#like_count').html(data);
+               $('#likes').hide();
+    });
+});
 
 
 </script>
+
 </body>
 </html>

@@ -1,6 +1,6 @@
 from urllib import quote_plus
 from django.contrib import messages
-from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
 try:
     from django.utils import simplejson as json
 except ImportError:
@@ -17,6 +17,10 @@ from django.contrib.auth.decorators import login_required
 from communities.models import Communities
 from taggit.models import Tag
 from django.views.decorators.http import require_POST
+from django.views.generic import View
+import datetime
+
+
 
 
 def home(request):
@@ -49,6 +53,7 @@ def post_create(request):
 		"form": form,
 	}
 	return render(request, "post_form.html", context)
+
 
 @login_required
 def post_detail(request, slug=None):
@@ -120,40 +125,6 @@ def tags(request, tag):
  
 	return render(request, "tags_list.html", context)
 
-#def like(request):
-#	if request.POST():
-#		a = Post.objects.get()
-#		count = a.likes
-#		count += 1
-#		a.likes = count
-#		a.save()
-#		context = {'a':a,}
-#		return HttpResponse(json.dumps(context), content_type='application/json')
-#	else:
-#		raise Http404
-
-#def like(request):
-#   if request.method == 'POST':
-#        user = request.user
-#        slug = request.POST.get('slug', None)
-#        posts = get_object_or_404(Post, slug=slug)
-
-#        if posts.likes.filter(id=user.id).exists():
-            # user has already liked this company
-            # remove like/user
-#            posts.likes.remove(user)
-#            message = 'You disliked this'
-#        else:
-            # add a new like for a company
-#            posts.likes.add(user)
-#            message = 'You liked this'
-
-#    context = {
-#    'likes_count': posts.total_likes, 
-#    'message': message
-#    }
-    # use mimetype instead of content_type if django < 5
-#    return HttpResponse(json.dumps(context), content_type='application/json')
 
 def post_list(request, slug=None):
 	today = timezone.now().date()
@@ -176,6 +147,7 @@ def post_list(request, slug=None):
 		"today": today,
 	}
 	return render(request, "post_list.html", context)
+
 
 @login_required
 def post_update(request, slug=None):
@@ -207,3 +179,9 @@ def post_delete(request, slug=None):
 	messages.success(request, "Successfully Deleted")
 	instance.delete()
 	return redirect("posts:list")
+
+
+
+
+
+

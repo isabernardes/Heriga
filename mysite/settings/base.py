@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'communities',
     'signups',
     'taggit',
-    'pagedown'
+    'pagedown',
+    'profiles',
 ]
 
 MIDDLEWARE_CLASSES = [
