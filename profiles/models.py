@@ -25,7 +25,7 @@ class UserGeneralInformation (models.Model):
 	active = models.BooleanField(default=True)
 
 	def __unicode__(self, ):
-			return self.cityofResidence
+			return self.cityofResidence or None
 
 class UserJob (models.Model):
 	user = models.ForeignKey(User)
@@ -40,14 +40,14 @@ class UserQualification (models.Model):
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True, null=True, blank=True) 
 
 	def __unicode__(self, ):
-			return self.university
+			return self.university or None
 
 class UserLanguage (models.Model):
 	user = models.ForeignKey(User)
 	languages = models.CharField(max_length=50, null=True, blank=True)
 
 	def __unicode__(self, ):
-			return self.languages	
+			return self.languages or ''	
 
 
 class UserPicture (models.Model):
@@ -61,5 +61,5 @@ class UserPicture (models.Model):
 	width_field = models.IntegerField(default=0)
 
    	def __unicode__(self, ):
-        	return str(self.image)
+        	return str(self.image) or ''
 

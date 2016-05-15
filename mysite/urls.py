@@ -19,10 +19,9 @@ urlpatterns = [
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'), # If user is not login it will redirect to login page
     url(r'^register/success/$', register_success),
     url(r'^comments/', include('comments.urls', namespace='comments')),
-    url(r'^profile/(?P<username>[\w.@+-]+)/$', 'profiles.views.profile_view', name='profile')
-    
+    url(r'^profile/', include('profiles.urls', namespace='profile')),
 
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

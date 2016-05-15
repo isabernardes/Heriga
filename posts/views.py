@@ -52,7 +52,7 @@ def post_create(request):
 	context = {
 		"form": form,
 	}
-	return render(request, "post_form.html", context)
+	return render(request, "stories/post_form.html", context)
 
 
 @login_required
@@ -112,7 +112,7 @@ def post_detail(request, slug=None):
             'objects':Post.objects.all(),
         } 
 
-	return render(request, "post_detail.html", context)
+	return render(request, "stories/post_detail.html", context)
 
 def tags(request, tag):
 	posts = Post.objects.filter(tags__name=tag)
@@ -123,7 +123,7 @@ def tags(request, tag):
             'name': tag,
         } 
  
-	return render(request, "tags_list.html", context)
+	return render(request, "stories/tags_list.html", context)
 
 
 def post_list(request, slug=None):
@@ -146,7 +146,7 @@ def post_list(request, slug=None):
 		"title": "List",
 		"today": today,
 	}
-	return render(request, "post_list.html", context)
+	return render(request, "stories/post_list.html", context)
 
 
 @login_required
@@ -169,7 +169,7 @@ def post_update(request, slug=None):
 		"tags":tags
 	}
 
-	return render(request, "post_form.html", context)
+	return render(request, "stories/post_form.html", context)
 	
 
 def post_delete(request, slug=None):

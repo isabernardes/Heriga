@@ -30,7 +30,7 @@ def comment_delete(request, id):
     context = {
         "object": obj
     }
-    return render(request, "confirm_delete.html", context)
+    return render(request, "comments/confirm_delete.html", context)
 
 def comment_thread(request, id):
     #obj = Comment.objects.get(id=id)
@@ -81,4 +81,4 @@ def comment_thread(request, id):
         "comment": obj,
         "form": form,
     }
-    return render(request, "comment_thread.html", context)
+    return render(request, "comments/comment_thread.html", context)

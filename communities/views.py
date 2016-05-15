@@ -25,7 +25,7 @@ def communities_create(request):
 	context = {
 		"form": form,
 	}
-	return render(request, "communities_form.html", context)
+	return render(request, "communities/communities_form.html", context)
 
 
 def communities_detail(request, slug=None):
@@ -38,7 +38,7 @@ def communities_detail(request, slug=None):
 		"object_list": queryset,
 		"instance": instance,
 	}
-	return render(request, "communities_detail.html", context)
+	return render(request, "communities/communities_detail.html", context)
 
 
 def communities_list(request):
@@ -54,7 +54,7 @@ def communities_list(request):
 		"name": "List",
 		"object_list": queryset
 	}
-	return render(request, "communities_list.html", context)
+	return render(request, "communities/communities_list.html", context)
 
 @login_required
 def communities_update(request, slug =None):
@@ -73,7 +73,7 @@ def communities_update(request, slug =None):
 		"form":form,
 	}
 
-	return render(request, "communities_form.html", context)
+	return render(request, "communities/communities_form.html", context)
 
 @login_required
 def communities_delete(request, slug=None):
