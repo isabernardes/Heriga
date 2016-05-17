@@ -30,15 +30,12 @@ def communities_create(request):
 
 def communities_detail(request, slug=None):
 	instance = get_object_or_404(Communities, slug=slug)
-
 	queryset = Post.objects.filter(community__slug=slug)
-	#queryset = Post.objects.active()
-
 	context = {
 		"object_list": queryset,
 		"instance": instance,
 	}
-	return render(request, "communities/communities_detail.html", context)
+	return render(request, "stories/post_list.html", context)
 
 
 def communities_list(request):

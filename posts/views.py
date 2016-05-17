@@ -19,7 +19,13 @@ from taggit.models import Tag
 from django.views.decorators.http import require_POST
 from django.views.generic import View
 import datetime
+from profiles.models import UserJob
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model, authenticate
 
+
+
+User = get_user_model()
 
 
 
@@ -40,9 +46,11 @@ def aboutus(request):
 def post_create(request):
 	#if not request.user.is_staff or not request.user.is_superuser:
 	#	raise Http404
-	form =PostForm(request.POST or None, request.FILES or None)
+	
+	form = PostForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
 		instance = form.save(commit=False)
+		instance.user = request.user
 		instance.save()
 		form.save_m2m()
 		messages.success(request, "Successfully Created")
@@ -127,10 +135,12 @@ def tags(request, tag):
 
 
 def post_list(request, slug=None):
+	author = User.objects.all()
 	today = timezone.now().date()
 	queryset_list = Post.objects.active()#.order_by("-timestamp")
 	if request.user.is_staff or request.user.is_superuser:
 		queryset_list = Post.objects.all()
+		queryset_list.user = request.user
 
 	query = request.GET.get("q")
 	if query:
@@ -143,10 +153,21 @@ def post_list(request, slug=None):
 
 	context = {
 		"object_list": queryset_list,
+		"author": author,
 		"title": "List",
 		"today": today,
 	}
 	return render(request, "stories/post_list.html", context)
+
+def user(request, username):
+	user = User.objects.all()
+	context = {
+		
+		"user": user,
+		
+	}
+	return render(request, "stories/post_list.html", context)
+
 
 
 @login_required
@@ -179,6 +200,17 @@ def post_delete(request, slug=None):
 	messages.success(request, "Successfully Deleted")
 	instance.delete()
 	return redirect("posts:list")
+
+def post_profile(request):
+
+
+	queryset_list = Post.objects.all()
+
+	context = {
+		"object_list": queryset_list,
+	}
+
+	return render(request, "profiles/profile_list.html", context)
 
 
 

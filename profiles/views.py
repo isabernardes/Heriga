@@ -3,14 +3,26 @@ from django.contrib.auth import get_user_model
 from django.forms.models import modelformset_factory
 from .models import *
 from .forms import *
+from posts.models import Post
+from communities.models import Communities
+from django.contrib.auth.models import User
+
 
 User = get_user_model()
 
 # Create your views here.
 def profile_detail(request, username):
 		user = get_object_or_404(User, username=username)
+	
+
 		profile, created = UserGeneralInformation.objects.get_or_create(user=user)
-		context = {'profile': profile, }
+		
+		user = request.user
+		
+
+		context = {
+			'profile': profile, 
+		}
 
 		return render(request, 'profiles/profile_detail.html', context)
 
@@ -77,5 +89,7 @@ def profile_update(request, username):
 	}
 
 		return render(request, 'profiles/profile_forms.html', context)
+
+
 
 	

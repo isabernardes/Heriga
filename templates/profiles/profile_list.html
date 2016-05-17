@@ -1,31 +1,5 @@
 {% extends "base.html" %}
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
-
-
 {% block content %}
-{% load staticfiles %}
-
-   
-
-<div class="row">
-	<div class='col-sm-12' style= "text-align:center">
-		<h1>Stories</h1></br>
-			<a class = "button" href='{% url "posts:create" %}'><button style= "margin-bottom: 50px"; "text-align:center" type="button" class="btn btn-primary communities-btn">Tell a story</button></br></a>
-	</div>
-</div>
-
-<div class='col-sm-9 col-sm-offset-3'>
-    <form method='GET' action='' class='row' style= "text-align:center">
-        <div class='col-sm-8'style= "text-align:center">
-           <div class='input-group' style= "text-align:center">
-                <input class='form-control' type='text' name='q' placeholder='Search posts' value='{{ request.GET.q }}'/>
-                	<span class='input-group-btn'>
-               			<button style="background-color:transparent"class='btn btn-default' type='submit'><i class="fa fa-search"></i></button>
-                	</span>
-            </div>
-        </div>
-	</form>
-</div>
 
 <div class='col-sm-6 col-sm-offset-3'>
 {% for obj in  object_list %}
@@ -40,13 +14,18 @@
 						<h3>Staff only: Draft</h3>
 					{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
 					<!--USER-->
-					{{ user.request }}
+					
 						
 					{% if obj.user.get_full_name %}
-						by:<a href = '/profile/{{ obj.user }}'>{{ obj.user.get_full_name }}</a>
+						by:<a href = '/profile/{{ user }}'>{{ obj.user.get_full_name }}</a>
+					}
+					}
 					{% endif %}
 					
+{% for item in user %}
+{{ item.username }}
 
+{% endfor %}
 
 
 
@@ -66,7 +45,7 @@
 
 {% endfor %}
 
-</div>
 
-</div>
+
+
 {% endblock content %}

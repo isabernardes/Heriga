@@ -25,13 +25,16 @@ class UserGeneralInformation (models.Model):
 	active = models.BooleanField(default=True)
 
 	def __unicode__(self, ):
-			return self.cityofResidence or None
+			return self.cityofResidence or ''
 
 class UserJob (models.Model):
 	user = models.ForeignKey(User)
 	occupation = models.CharField(max_length=100, null=True, blank=True)
 	placeOfWork = models.CharField(max_length=100, null=True, blank=True)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True, null=True, blank=True)
+
+	def __unicode__(self, ):
+			return self.occupation or ''
 	
 
 class UserQualification (models.Model):
@@ -40,7 +43,7 @@ class UserQualification (models.Model):
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True, null=True, blank=True) 
 
 	def __unicode__(self, ):
-			return self.university or None
+			return self.university or ''
 
 class UserLanguage (models.Model):
 	user = models.ForeignKey(User)

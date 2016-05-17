@@ -7,6 +7,8 @@ from .views import (
 	post_update,
 	post_delete,
 	tags,
+	#post_profile,
+	user,
 	)
 
 
@@ -19,6 +21,8 @@ urlpatterns = [
 	url(r'^(?P<slug>[\w-]+)/edit$', post_update, name='update'),
 	url(r'^(?P<slug>[\w-]+)/delete/$', post_delete),
 	url(r'^tag/(?P<tag>\w+)/$', tags),
+	url(r'^$', user, name='list'),
+	#url(r'^post_profile/$', post_profile, name='post_profile'),
 
 	
 
