@@ -2,9 +2,9 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
-from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
+from posts.models import Post
 
 User = settings.AUTH_USER_MODEL
 

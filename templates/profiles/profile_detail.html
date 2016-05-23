@@ -18,7 +18,67 @@
 	</div>
 </div>
 	
-			
 
+
+
+<!--POSTS_PROFILE-->
+
+<div class='col-sm-6 col-sm-offset-3'>
+	{% for obj in profile.user.post_set.all %}
+			<div class="row">
+				<div class="col-sm-12">
+	    			<div class="thumbnail">
+	    				<a href = '{{ obj.get_absolute_url}}'>{{ obj.title }}</a><br/>
+							{% if obj.image %}
+								<img class = "img-responsive" src = '{{ obj.image.url }}'>
+							{% endif %}
+
+						<!--Draft-->
+						{% if obj.draft %}
+							<h3>Staff only: Draft</h3>
+						{% endif %} 
+
+						{% if obj.publish > today %}
+							<h3>Staff Only: Future Post</h3>
+						{% endif %}
+
+						<!--USER-->
+						{{ user.request }}
+						{% if obj.user.get_full_name %}
+							by:<a href = '/profile/{{ obj.user }}'>{{ obj.user.get_full_name }}</a>
+						{% endif %}
+						
+						<p class='content-markdown'>{{ obj.content }}</p>
+						{{ obj.content |linebreaks|truncatechars:120}}<br/>
+						{{ obj.publish }}<br/>
+						 {% if obj.tags %}<p>Labels:
+	                        {% for tag in obj.tags.all %}
+	                    <a href="/posts/tag/{{ tag }}">{{ tag.name }}</a>
+	                    {% if not forloop.last %},{% endif%}
+	                    {% endfor %}</p>{% endif %}
+	                    <a class="button" href='{{ obj.get_absolute_url}}'>View</a>
+	              	
+	           	</div>
+	      	</div>
+	
+</div>
+{% endfor %}
+
+
+<!--COMMUNITIES-->
+
+<div class="row" style= "margin-left:50px; margin-right:50px; margin-top:100px;">   		 	
+	{% for obj in  profile.user.communities_set.all %}
+		<div class="col-sm-4" style="text-align:center">
+			<div class="thumbnail">
+				<a href = '{{ obj.get_absolute_url}}'><h2>{{ obj.name }}</h2></a></br>
+				<p>{{ obj.description | truncatechars:20 }}</p> </br>
+				{% if obj.image %}
+					<img class = "img-responsive" src = '{{ obj.image.url }}'>
+				{% endif %}
+			</div>
+		</div>
+{% endfor %}
+</div>
 
 {% endblock content %}
