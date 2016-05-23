@@ -16,7 +16,6 @@ def profile_detail(request, username):
 		profile, created = UserGeneralInformation.objects.get_or_create(user=user)
 		user = request.user
 		
-
 		context = {
 			'profile': profile, 
 		}
@@ -86,6 +85,7 @@ def profile_update(request, username):
 	}
 
 		return render(request, 'profiles/profile_forms.html', context)
+
 
 
 
