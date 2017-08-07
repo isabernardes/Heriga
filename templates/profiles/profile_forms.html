@@ -1,18 +1,69 @@
 {% extends "base.html" %}
+{%  block jquery %}
+
+	$('#myTab a').click(function (e) {
+	  e.preventDefault()
+	  $(this).tab('show')
+	})
+	{% endblock %}
 
 
 {% block content %}
 	<div class='container'>
 	   	<div class="col-sm-12" style= "text-align:center;">
-			<h1>Edit your Profile</h1></br>
-			<form method = 'POST' action '' enctype='multipart/form-data' >{% csrf_token %}
-				{{ info_form.as_p }}
-				{{ formset_j.as_p }}
-				{{ formset_q.as_p }}
-				{{ formset_l.as_p }}
-				{{ formset_p.as_a}}
+	   		<h1>Edit your Profile</h1></br>
+
+	   		<ul class="nav nav-tabs" id="myTab">
+				<li class="active">
+					<a class="active" href="#home" role="tab">General Information</a>
+				</li>
+				<li>
+					<a href="#jobs" role="tab">Jobs</a>
+				</li>
+				<li>
+					<a href="#qualifications" role="tab">Qualifications</a>
+				</li>
+				<li>
+					<a href="#languages" role="tab">Languages</a>
+				</li>
+				<!--<li>
+					<a href="#pictures" role="tab">Pictures</a>
+				</li>-->
+			</ul>
+
+					<!-- Tab panes -->
+			<div class="tab-content">
+				<div class="tab-pane active" id="home"> 
+					<form method = 'POST' action '' enctype='multipart/form-data' >{% csrf_token %}
+						<div class = "row">
+							<p>Edit General Info</p>
+								{{ info_form.as_p }}
+						</div>
+						<input type = 'submit' value = 'Update' />
+					</form>
+				</div>
+				
+				<div class="tab-pane" id="jobs">
+					<form method = 'POST' action '' enctype='multipart/form-data' >{% csrf_token %}
+						{{ formset_j.as_p }}
+				</div>
 				<input type = 'submit' value = 'Update' />
-			</form>
+				</form>
+
+				<div class="tab-pane" id="qualifications">
+					<form method = 'POST' action '' enctype='multipart/form-data' >{% csrf_token %}
+						{{ formset_q.as_p }}
+				</div>
+					
+				<div class="tab-pane" id="languages">
+					<form method = 'POST' action '' enctype='multipart/form-data' >{% csrf_token %}
+						{{ formset_l.as_p. }}
+				</div>
+				<!--<div class="tab-pane" id="pictures">
+					<form method = 'POST' action '' enctype='multipart/form-data' >{% csrf_token %}
+						{{ formset_p.as_a }}
+				</div>-->
+			</div>
 		</div>
 	</div>
 {% endblock content %}

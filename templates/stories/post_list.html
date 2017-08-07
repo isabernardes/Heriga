@@ -41,7 +41,7 @@
 					{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
 					<!--USER-->
 					{{ user.request }}
-						
+						<p><a class='like-btn' data-href='{{ obj.get_api_like_url }}' data-likes='{{ obj.likes.count }}'  href='{{ obj.get_like_url }}'>{{ obj.likes.count }} Like</a></p>
 					{% if obj.user.get_full_name %}
 						by:<a href = '/profile/{{ obj.user }}'>{{ obj.user.get_full_name }}</a>
 					{% endif %}

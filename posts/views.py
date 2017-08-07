@@ -22,12 +22,12 @@ import datetime
 from profiles.models import UserJob
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model, authenticate
-
-
+from django.views.generic import RedirectView
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import authentication, permissions
 
 User = get_user_model()
-
-
 
 def home(request):
 	queryset_one = Post.objects.all().order_by("-timestamp")[:1]
@@ -122,6 +122,47 @@ def post_detail(request, slug=None):
 
 	return render(request, "stories/post_detail.html", context)
 
+
+class PostLikeToggle(RedirectView):
+	def get_redirect_url(self, *args, **kwargs):
+		slug = self.kwargs.get("slug")
+		print(slug)
+		obj = get_object_or_404(Post, slug=slug)
+		url_ = obj.get_absolute_url()
+		user = self.request.user
+		if user.is_authenticated():
+			if user in obj.likes.all():
+				obj.likes.remove(user)
+			else:
+				obj.likes.add(user)
+		return url_
+
+
+class PostLikeAPIToggle(APIView):
+    authentication_classes = (authentication.SessionAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, slug=None, format=None):
+        # slug = self.kwargs.get("slug")
+        obj = get_object_or_404(Post, slug=slug)
+        url_ = obj.get_absolute_url()
+        user = self.request.user
+        updated = False
+        liked = False
+        if user.is_authenticated():
+            if user in obj.likes.all():
+                liked = False
+                obj.likes.remove(user)
+            else:
+                liked = True
+                obj.likes.add(user)
+            updated = True
+        data = {
+            "updated": updated,
+            "liked": liked
+        }
+        return Response(data)
+
 def tags(request, tag):
 	posts = Post.objects.filter(tags__name=tag)
 	name = Post.objects.all(),
@@ -202,8 +243,6 @@ def post_delete(request, slug=None):
 	return redirect("posts:list")
 
 def post_profile(request):
-
-
 	queryset_list = Post.objects.all()
 
 	context = {

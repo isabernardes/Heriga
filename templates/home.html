@@ -14,7 +14,8 @@
 			<div class = "featured-story">
 				<h2><a href = '{{ obj.get_absolute_url}}'>{{ obj.title }}</a></h2><br/>
 					{% if obj.user.get_full_name %}
-						<p>by:{{ obj.user.get_full_name }}</p>
+						
+						<p>by:<a href = '/profile/{{ obj.user }}'> {{ obj.user.get_full_name }} </p></a>
 					{% endif %}		
 					{% if obj.draft %}
 						<h3>Staff only: Draft</h3>

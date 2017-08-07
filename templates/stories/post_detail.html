@@ -10,10 +10,13 @@
   	 {% if instance.image %}
   	   	<img class = "img-responsive" src = '{{ instance.image.url }}'>
       {% endif %}
-  			<h1>{{title}}</h1><p>{% if instance.draft %} <span style= 'color:red'>Draft</span>{% endif %} {{ instance.publish }}</p>	
-  			<p>Author: {{ instance.user }}</p>
+  			<h1>{{title}}</h1><p>{% if instance.draft %} <span style= 'color:red'>Draft</span>{% endif %} {{ instance.publish }}</p>
+
+  			<p>by:<a href = '/profile/{{ instance.user }}'> {{ instance.user }} </p></a>
+
+
         <p>Community: {{ instance.community }}</p>
-        <p><div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div><hr/></p>
+       <!-- <p><div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div><hr/></p>-->
   			<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.built_absolute_uri }}">
   Facebook</a>
   			<a href="https://twitter.com/home?status={{ instance.content|truncatechars:80|urlify }}%20{{ request.built_absolute_uri }}">
@@ -24,6 +27,10 @@
         <p>Language:{{ instance.language }}</p><br/>
         <p>Source:{{ instance.source }}</p><br/>
         <p>Summary:{{ instance.summary }}</p><br/>
+        
+        <p><a class='like-btn' data-href='{{ instance.get_api_like_url }}' data-likes='{{ instance.likes.count }}' href='{{ instance.get_like_url }}'>{{ instance.likes.count }} Like</a></p>
+
+
         {% if instance.tags %}
           <p>Labels:
         {% for tag in instance.tags.all %}
