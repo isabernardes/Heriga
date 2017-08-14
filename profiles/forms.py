@@ -6,7 +6,6 @@ class UserGeneralInformationForm(forms.ModelForm):
         model = UserGeneralInformation
         fields = "__all__" 
 
-
 class UserJobForm(forms.ModelForm):
     class Meta:
         model = UserJob

@@ -7,6 +7,8 @@ from django.db.models.signals import pre_save
 from django.utils import timezone
 from django.utils.text import slugify
 from comments.models import Comment
+from communities.models import Communities
+
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
 
@@ -40,9 +42,9 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
     community = models.ForeignKey('communities.Communities', default = 1)
-    language = models.CharField(max_length=120)
-    source = models.CharField(max_length=120)
-    summary = models.CharField(max_length=120)
+    language = models.CharField(max_length=120, blank = True)
+    source = models.CharField(max_length=120, blank = True)
+    summary = models.CharField(max_length=120,  blank = True)
     tags = TaggableManager(blank=True)
 
 
@@ -78,6 +80,12 @@ class Post(models.Model):
     def comments(self):
         instance = self
         qs = Comment.objects.filter_by_instance(instance)
+        return qs
+
+    @property
+    def communities(self):
+        instance = self
+        qs = Communities.objects.filter_by_instance(instance)
         return qs
 
     @property

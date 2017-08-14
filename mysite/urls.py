@@ -8,9 +8,9 @@ from signups.views import *
 
 urlpatterns = [
   
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'posts.views.home', name='homepage'),
-    url(r'^about-us/$','posts.views.aboutus', name='aboutus'),
+    #url(r'^admin/', admin.site.urls),
+    url(r'^$', 'signups.views.home', name='homepage'),
+    url(r'^contact-us/$','signups.views.contactus', name='contactus'),
     url(r'^posts/', include('posts.urls', namespace='posts')),
     url(r'^communities/', include('communities.urls', namespace='communities')),
     url(r'^signups/$', 'signups.views.register', name='signup'),

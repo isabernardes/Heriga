@@ -27,26 +27,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
 
+
 User = get_user_model()
 
-def home(request):
-	queryset_one = Post.objects.all().order_by("-timestamp")[:1]
-	queryset_two = Communities.objects.all().order_by("-timestamp")[:3]
-	context = {
-		"queryset_story": queryset_one,
-		"queryset_community":queryset_two
-	}
 
-	return render (request, "home.html", context)
-
-def aboutus(request):
-	return render (request, "aboutus.html")
 
 @login_required
 def post_create(request):
-	#if not request.user.is_staff or not request.user.is_superuser:
-	#	raise Http404
-	
+	#FORM
 	form = PostForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
 		instance = form.save(commit=False)
@@ -57,8 +45,10 @@ def post_create(request):
 		return HttpResponseRedirect(instance.get_absolute_url())
 	else:
 		messages.error(request, "Not Successfully Created")
+	
 	context = {
 		"form": form,
+
 	}
 	return render(request, "stories/post_form.html", context)
 
@@ -66,16 +56,12 @@ def post_create(request):
 @login_required
 def post_detail(request, slug=None):
 	instance = get_object_or_404(Post, slug=slug)
-	#if instance.publish > timezone.now().date() or instance.draft:
-		#if not request.user.is_staff or not request.user.is_superuser:
-		#	raise Http404
 	share_string = quote_plus(instance.content)
 
 	initial_data = {
 			"content_type": instance.get_content_type,
 			"object_id": instance.id
 	}
-
 	#FORM SAVE
 	form = CommentForm(request.POST or None, initial=initial_data)
 	if form.is_valid():
@@ -93,8 +79,7 @@ def post_detail(request, slug=None):
 			parent_qs = Comment.objects.filter(id=parent_id)
 			if parent_qs.exists() and parent_qs.count() == 1:
 				parent_obj = parent_qs.first()
-
-
+	#COMMENTS
 		new_comment, created = Comment.objects.get_or_create(
 							user = request.user,
 							content_type= content_type,
@@ -104,16 +89,16 @@ def post_detail(request, slug=None):
 						)
 
 		return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
-
-
 	comments = instance.comments
+	#COMMUNITIES
+
 	context = {
 		"title": instance.title,
 		"instance": instance,
 		"share_string": share_string,
 		"comments": comments,
 		"comment_form":form,
-		"tags": tags
+		"tags": tags,
 	}
 
 	extra_context={
@@ -176,7 +161,7 @@ def tags(request, tag):
 
 
 def post_list(request, slug=None):
-	author = User.objects.all()
+	user = User.objects.all()
 	today = timezone.now().date()
 	queryset_list = Post.objects.active()#.order_by("-timestamp")
 	if request.user.is_staff or request.user.is_superuser:
@@ -194,7 +179,7 @@ def post_list(request, slug=None):
 
 	context = {
 		"object_list": queryset_list,
-		"author": author,
+		"user": user,
 		"title": "List",
 		"today": today,
 	}
@@ -203,18 +188,13 @@ def post_list(request, slug=None):
 def user(request, username):
 	user = User.objects.all()
 	context = {
-		
 		"user": user,
-		
 	}
 	return render(request, "stories/post_list.html", context)
 
 
-
 @login_required
 def post_update(request, slug=None):
-	#if not request.user.is_staff or not request.user.is_superuser:
-	#	raise Http404
 	instance = get_object_or_404(Post, slug =slug)
 	form = PostForm(request.POST or None, request.FILES or None, instance=instance)
 	if form.is_valid():
@@ -235,8 +215,6 @@ def post_update(request, slug=None):
 	
 
 def post_delete(request, slug=None):
-	#if not request.user.is_staff or not request.user.is_superuser:
-	#	raise Http404
 	instance = get_object_or_404(Post, slug =slug)
 	messages.success(request, "Successfully Deleted")
 	instance.delete()

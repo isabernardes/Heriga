@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+  <div class='row'>
+		<div class='col-sm-6 col-sm-offset-3'>
+
+
+		<h1 class='text-align-center'>{{ title }}</h1>
+		
+
+		<form method='POST' action='' enctype="multipart/form-data">{% csrf_token %}
+		{{ form }}
+		{{ email }}
+		{{ message }}
+
+		<input class='btn btn-default' type='submit' value='Submit' />
+
+		</form>
+	</div>
+</div>
+  
+{% endblock content %}

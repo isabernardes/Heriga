@@ -3,22 +3,67 @@ from django.contrib.auth import get_user_model
 from django.forms.models import modelformset_factory
 from .models import *
 from .forms import *
+from signups import *
+from posts.views import *
 from posts.models import Post
 from communities.models import Communities
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 User = get_user_model()
 
-# Create your views here.
+
+#def home(request):
+#	title = 'Sign up now'
+#	form = UserRegistrationForm(request.POST or None)
+#	context = {
+#		"title": title,
+#		"form":form
+#	}
+#
+#	if form.is_valid():
+#		instance = form.save(commit=False)
+#
+#		full_name = form.cleaned_data.get("full_name")
+#		if not full_name:
+#			full_name = "New full name"
+#		instance.full_name = full_name
+#		instance.save()
+#		context = {
+#			"title": "Thank you"
+#		}
+#
+#	if request.user.is_authenticated():
+#		queryset_one = Post.objects.all().order_by("-timestamp")[:1]
+#		queryset_two = Communities.objects.all().order_by("-timestamp")[:3]
+#	
+#		context = {
+#			"queryset_story": queryset_one,
+#			"queryset_community":queryset_two
+#		}
+#
+#	return render (request, "home.html", context)
+
+#def aboutus(request):
+#	return render (request, "aboutus.html")
+
+
+
+
+
+
+
+
+@login_required
 def profile_detail(request, username):
 		user = get_object_or_404(User, username=username)
-		profile, created = UserGeneralInformation.objects.get_or_create(user=user)
 		user = request.user
+		profile, created = UserGeneralInformation.objects.get_or_create(user=user)
+		
 		context = {
 			'profile': profile, 
 		}
-
 		return render(request, 'profiles/profile_detail.html', context)
 
 

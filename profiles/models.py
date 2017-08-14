@@ -5,6 +5,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
 from posts.models import Post
+from django.db.models.signals import post_save
 
 User = settings.AUTH_USER_MODEL
 
@@ -16,7 +17,7 @@ def upload_location(instance, filename):
 
 
 class UserGeneralInformation (models.Model):
-	user = models.OneToOneField(User)
+	user = models.OneToOneField(settings.AUTH_USER_MODEL)
 	dateofbirth = models.DateField(null=True, blank=True)
 	cityOfBirth  = models.CharField(max_length=50, null=True, blank=True)
 	countryOfBirth = models.CharField(max_length=50, null=True, blank=True)
@@ -65,4 +66,11 @@ class UserPicture (models.Model):
 
    	def __unicode__(self, ):
         	return str(self.image) or ''
+def post_save_user_model_receiver(sender,instance,created, *args, **kwargs):
+	if created:
+		try:
+			Profile.objects.create(user=instance)
+		except:
+			pass
+post_save.connect(post_save_user_model_receiver, sender=settings.AUTH_USER_MODEL)
 

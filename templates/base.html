@@ -25,6 +25,9 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="{% static './css/css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static './css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
   <!-- Scripts
@@ -33,6 +36,9 @@
   <script src='http://code.jquery.com/jquery-1.9.1.js'></script>
   <script src='http://code.jquery.com/ui/1.11.4/jquery-ui.min.js'></script>
   <script src="{% static './css/js/bootstrap.js' %}"></script>
+
+  <!--JQuery-->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="crossorigin="anonymous"></script>
   
 
  
@@ -93,37 +99,43 @@
 		{% include "messages_display.html" %}
 		{%  block content %}{%  endblock content %}
 
-
+<!-- JQuery AJAX scripts -->
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-
 <script src='{% static "css/js/django.csrf.js" %}'></script>
-
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="{% static './css/js/bootstrap.min.js' %}"></script>
 
+<!-- Markdown -->
+<script src=https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js></script>
 
-<script>
-$(document).ready(function(){
-  {% block jquery %}
-  {% endblock jquery %}
-});
-</script>
+
+
+
+
+<!--JQUERY-->
 
 <script type="text/javascript">
-(function(d, s, id) {
+$(document).ready(function(){
+    (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
       js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
+    });
+    
+$(document).ready(function(){
     $(".comment-reply-btn").click(function(event){
         event.preventDefault();
         $(this).parent().next(".comment-reply").fadeToggle();
+      })
     })
 
-$(".like-btn").click(function(e){
+
+  $(document).ready(function(){
+    $(".like-btn").click(function(e){
         e.preventDefault()
         var this_ = $(this)
         var likeUrl = this_.attr("data-href")
@@ -152,10 +164,7 @@ $(".like-btn").click(function(e){
         }
        
       })
-  })
-
-
+  });
 </script>
-
 </body>
 </html>

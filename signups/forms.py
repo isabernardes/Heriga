@@ -5,13 +5,28 @@ from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 
 class UserRegistrationForm(forms.Form):
-    username = forms.RegexField(regex=r'^\w+$', widget=forms.TextInput(attrs=dict(required=True, max_length=30)), label=_("Username"), error_messages={ 'invalid': _("This value must contain only letters, numbers and underscores.") })
+    username = forms.RegexField(
+        regex=r'^\w+$', 
+        widget=forms.TextInput(
+                        attrs=dict(
+                                required=True, 
+                                max_length=30)),
+                        label=_("Username"), 
+                        error_messages={ 'invalid': _("This value must contain only letters, numbers and underscores.") 
+                        })
+
     email = forms.EmailField(required = True)
     first_name = forms.CharField(required = False)
     last_name = forms.CharField(required = False)
+    city = forms.CharField(required = False)
+    country = forms.CharField(required = False)
     birthday = forms.DateField(required = False)
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs=dict(required=True, max_length=30, render_value=False)), label=_("Password"))
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs=dict(required=True, max_length=30, render_value=False)), label=_("Password (again)"))
+    password1 = forms.CharField(widget=forms.PasswordInput(
+                                            attrs=dict(required=True, max_length=30, render_value=False)), 
+                                            label=_("Password"))
+    password2 = forms.CharField(widget=forms.PasswordInput(
+                                            attrs=dict(required=True, max_length=30, render_value=False)), 
+                                            label=_("Password (again)"))
     
     def clean_username(self):
 		try:
@@ -41,4 +56,8 @@ class UserRegistrationForm(forms.Form):
             #user.save()
 
         #return user
+class ContactForm(forms.Form):
+    full_name = forms.CharField(required=False)
+    email = forms.EmailField()
+    message = forms.CharField()
 	

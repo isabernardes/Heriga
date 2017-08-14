@@ -16,7 +16,8 @@ def communities_create(request):
 	form =CommunitiesForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
 		instance = form.save(commit=False)
-		instance.save()
+		instance.user = request.user # User creates a Post
+		instance.save() # User saves a post
 		messages.success(request, "Successfully Created")
 		return HttpResponseRedirect(instance.get_absolute_url())
 	else:
@@ -30,6 +31,13 @@ def communities_create(request):
 
 def communities_detail(request, slug=None):
 	instance = get_object_or_404(Communities, slug=slug)
+
+	#Done from postviews to commentsview
+	# content_type =ContentType.objects.get_for_model(Post)
+	#obj_id = instance.id
+	#communities = Communities.objects.filter(content_type=content_type, object_id=obj_id)
+
+
 	queryset = Post.objects.filter(community__slug=slug)
 	context = {
 		"object_list": queryset,

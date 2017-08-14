@@ -23,7 +23,6 @@
   Twitter</a>
   			<a href='https://plus.google.com/share?url={{ request.built_absolute_uri }}'>GooglePlus</a>
   			<p>{{ instance.content |linebreaks }}</p><br/>
-        <p>{{ instance.likes }} People liked this story</p>
         <p>Language:{{ instance.language }}</p><br/>
         <p>Source:{{ instance.source }}</p><br/>
         <p>Summary:{{ instance.summary }}</p><br/>
@@ -63,19 +62,16 @@
 
             <form method="POST" action="."> {% csrf_token %}
                 {{ comment_form }}
-                <input type='hidden' name='parent_id' value='{{ comment.id }}'></br>
-            </form>
-        </div>
+                <input type='hidden' name='parent_id' value='{{ comment.id }}'>
+                    <input type='submit' name='Reply' class = "btn btn-primary"></br>
+                </form>
+            </div>
 
         </blockquote>
 
         <hr/>
         {% endfor %}
     </div>
-
-
-
-
 </div>
 
 {% endblock content %}

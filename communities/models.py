@@ -4,6 +4,10 @@ from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+#from posts.models import Post
+
 
 # Create your models here.
 # MVC MODEL VIEW CONTROLLER
@@ -15,8 +19,26 @@ def upload_location(instance, filename):
 #	def active(self, *args, **kwargs):
 #		return super(CommunitiesManager, self).filter(community__slug=slug)
 
+
+
+class CommunitiesManager(models.Manager):
+    #def all(self):
+     #   qs = super(CommunitiesManager, self).filter(parent=None)
+      #  return qs
+
+    def filter_by_instance(self, instance):
+        content_type = ContentType.objects.get_for_model(instance.__class__)
+        obj_id = instance.id
+        qs = super(CommunitiesManager, self).filter(content_type=content_type, object_id= obj_id).filter(parent=None)
+        return qs
+
+
+
+
+
+
 class Communities(models.Model):
-	user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
+	user = models.ForeignKey(User, null=True, blank=True)
 	name = models.CharField(max_length=120)
 	slug = models.SlugField(unique=True)
 	description = models.TextField()
@@ -29,6 +51,10 @@ class Communities(models.Model):
             height_field="height_field")
 	height_field = models.IntegerField(default=0)
 	width_field = models.IntegerField(default=0)
+	content_type   = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+	object_id      = models.PositiveIntegerField()
+	content_object = GenericForeignKey('content_type', 'object_id')
+	parent         = models.ForeignKey("self", null=True, blank=True)
 		
 
 	def __unicode__(self):
