@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 
 from .views import (
-	profile_detail,
+	profile_view,
 	profile_update,
 	#edit_info,
 	#edit_jobs,
@@ -13,11 +13,9 @@ from .views import (
 	)
 
 
-
-
 urlpatterns = [
 	
-	url(r'^(?P<username>[\w.@+-]+)/$', profile_detail, name='profile_detail'),
+	url(r'^(?P<username>[\w.@+-]+)/$', profile_view, name='profile_view'),
 	url(r'^(?P<username>[\w.@+-]+)/edit$', profile_update, name='profile_update'),
 	#url(r'^(?P<username>[\w.@+-]+)/edit$', edit_info, name='edit_info'),
 	#url(r'^(?P<username>[\w.@+-]+)/edit$', edit_jobs, name='edit_jobs'),

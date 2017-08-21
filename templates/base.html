@@ -88,7 +88,14 @@
         <li><a href='{% url "homepage" %}'>home</a></li>
         <li><a href='{% url "posts:list" %}'>stories</a></li>
         <li><a href='{% url "communities:communities_list" %}'>communities</a></li>
-        <li><a href='{% url "signup" %}'>signup</a></li>
+        <li>
+         <a href='profile: username'> {% if user.is_authenticated %} 
+                            <p>Welcome {{ user.username }}</p>
+                            <li><a href='{% url "logout" %}'>logout</a></li>
+                      {% else %}
+                             <a href='{% url "signup" %}'>signup</a> 
+                      {% endif %}
+                            </a></li>
       </ul>
     </div>
   </div>

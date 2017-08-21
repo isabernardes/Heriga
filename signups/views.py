@@ -1,34 +1,19 @@
-from django.shortcuts import render
-#from .models import SignUp
+from django.shortcuts import render, Http404
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse
+from django.core.mail import send_mail
+from django.conf import settings
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.views.decorators.csrf import csrf_protect
-from forms import UserRegistrationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from signups.forms import *
-from django.http import HttpResponseRedirect
-from .forms import UserRegistrationForm
-from django.core.mail import send_mail
-from django.conf import settings
-from .forms import ContactForm
+from django.contrib.auth.models import User
 
-# Create your views here.
-#def register_user(request):
-    #if request.method == 'POST':
-        #form = MyRegistrationForm(request.POST)     # create form object
-        #if form.is_valid():
-            #form.save()
-            #return HttpResponseRedirect('/accounts/register_success')
-    #args = {}
-    #args.update(csrf(request))
-    #args['form'] = MyRegistrationForm()
-    #print args
-    #return render(request, 'signup.html', args)
+from .forms import UserRegistrationForm, ContactForm
+from posts.models import Post
 
 
 def home(request):
@@ -41,26 +26,18 @@ def home(request):
 
     if form.is_valid():
         instance = form.save(commit=False)
-
-        full_name = form.cleaned_data.get("full_name")
-        if not full_name:
-            full_name = "New full name"
-        instance.full_name = full_name
+        username = form.cleaned_data.get("username")
+        if not username:
+            username = "New username"
+        instance.username = username
         instance.save()
         context = {
             "title": "Thank you"
         }
 
-    if request.user.is_authenticated():
-        queryset_one = Post.objects.all().order_by("-timestamp")[:1]
-        queryset_two = Communities.objects.all().order_by("-timestamp")[:3]
-    
-        context = {
-            "queryset_story": queryset_one,
-            "queryset_community":queryset_two
-        }
 
-    return render (request, "home.html", context)
+        return render (request, "home.html", context)
+
 
 def contactus(request):
     title = 'Contact Us'
@@ -103,22 +80,22 @@ def register(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = User.objects.create_user(
-            username=form.cleaned_data['username'],
-            password=form.cleaned_data['password1'],
-            email=form.cleaned_data['email']
+            username = form.cleaned_data['username'],
+            password = form.cleaned_data['password1'],
+            email = form.cleaned_data['email'],
+            first_name = form.cleaned_data['first_name'],
+            last_name = form.cleaned_data['last_name'],
             )
             return HttpResponseRedirect('/register/success/')
     else:
         form = UserRegistrationForm()
-    variables = RequestContext(request, {
-    'form': form
-    })
+
+    variables = RequestContext(request, {'form': form})
  
-    return render_to_response(
-    'registration/signup.html',
-    variables,
-    )
+    return render_to_response('registration/signup.html', variables,)
  
+
+
 def register_success(request):
     return render_to_response(
     'registration/success.html',

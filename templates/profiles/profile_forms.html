@@ -15,8 +15,9 @@
 
 	   		<ul class="nav nav-tabs" id="myTab">
 				<li class="active">
-					<a class="active" href="#home" role="tab">General Information</a>
+					<a class="active" href="#home" role="tab">Information</a>
 				</li>
+				<!--
 				<li>
 					<a href="#jobs" role="tab">Jobs</a>
 				</li>
@@ -26,7 +27,7 @@
 				<li>
 					<a href="#languages" role="tab">Languages</a>
 				</li>
-				<!--<li>
+				<li>
 					<a href="#pictures" role="tab">Pictures</a>
 				</li>-->
 			</ul>
@@ -37,7 +38,9 @@
 					<form method = 'POST' action '' enctype='multipart/form-data' >{% csrf_token %}
 						<div class = "row">
 							<p>Edit General Info</p>
-								{{ info_form.as_p }}
+								{{ user.request }}
+								{{ form.as_p }}
+								
 						</div>
 						<input type = 'submit' value = 'Update' />
 					</form>

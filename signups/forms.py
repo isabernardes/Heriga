@@ -4,6 +4,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 
+
+class ContactForm(forms.Form):
+    full_name = forms.CharField(required=False)
+    email = forms.EmailField()
+    message = forms.CharField()
+
+
 class UserRegistrationForm(forms.Form):
     username = forms.RegexField(
         regex=r'^\w+$', 
@@ -16,11 +23,8 @@ class UserRegistrationForm(forms.Form):
                         })
 
     email = forms.EmailField(required = True)
-    first_name = forms.CharField(required = False)
-    last_name = forms.CharField(required = False)
-    city = forms.CharField(required = False)
-    country = forms.CharField(required = False)
-    birthday = forms.DateField(required = False)
+    first_name = forms.CharField(required = True)
+    last_name = forms.CharField(required = True)
     password1 = forms.CharField(widget=forms.PasswordInput(
                                             attrs=dict(required=True, max_length=30, render_value=False)), 
                                             label=_("Password"))
@@ -56,8 +60,5 @@ class UserRegistrationForm(forms.Form):
             #user.save()
 
         #return user
-class ContactForm(forms.Form):
-    full_name = forms.CharField(required=False)
-    email = forms.EmailField()
-    message = forms.CharField()
+
 	

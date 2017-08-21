@@ -19,7 +19,7 @@ from taggit.models import Tag
 from django.views.decorators.http import require_POST
 from django.views.generic import View
 import datetime
-from profiles.models import UserJob
+
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model, authenticate
 from django.views.generic import RedirectView

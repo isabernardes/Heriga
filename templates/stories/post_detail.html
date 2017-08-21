@@ -23,15 +23,21 @@
   Twitter</a>
   			<a href='https://plus.google.com/share?url={{ request.built_absolute_uri }}'>GooglePlus</a>
   			<p>{{ instance.content |linebreaks }}</p><br/>
-        <p>Language:{{ instance.language }}</p><br/>
-        <p>Source:{{ instance.source }}</p><br/>
+        {% if instance.language %}
+                <p>Language:{{ instance.language }}</p><br/>
+        {% endif %}
+        {% if instance.source %}
+          <p>Source:{{ instance.source }}</p><br/>
+          {% endif %}
+        {% if instance.summary %}
         <p>Summary:{{ instance.summary }}</p><br/>
+        {% endif %}
         
         <p><a class='like-btn' data-href='{{ instance.get_api_like_url }}' data-likes='{{ instance.likes.count }}' href='{{ instance.get_like_url }}'>{{ instance.likes.count }} Like</a></p>
 
 
         {% if instance.tags %}
-          <p>Labels:
+          <p>
         {% for tag in instance.tags.all %}
           <a href="/posts/tag/{{ tag }}">{{ tag.name }}</a>
           {% if not forloop.last %},{% endif%}
