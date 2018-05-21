@@ -41,7 +41,7 @@ class Post(models.Model):
     publish = models.DateField(auto_now=False, auto_now_add=False)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
-    community = models.ForeignKey('communities.Communities', default = 1)
+    community = models.ForeignKey(Communities, on_delete=models.CASCADE)
     language = models.CharField(max_length=120, blank = True)
     source = models.CharField(max_length=120, blank = True)
     summary = models.CharField(max_length=120,  blank = True)
